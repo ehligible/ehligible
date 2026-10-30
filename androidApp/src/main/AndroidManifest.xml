@@ -58,6 +58,11 @@
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
+
+        <!-- Background location updates (v1.1+); only registered when that permission is granted. -->
+        <receiver
+            android:name=".detection.LocationUpdatesReceiver"
+            android:exported="false" />
     </application>
 
 </manifest>

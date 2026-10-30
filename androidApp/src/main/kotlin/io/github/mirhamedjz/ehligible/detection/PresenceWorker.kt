@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit
 class PresenceWorker(context: Context, params: WorkerParameters) : CoroutineWorker(context, params) {
     override suspend fun doWork(): Result {
         val app = applicationContext as EhligibleApp
+        BackgroundLocation.sync(app)
         if (app.graph.repository.current().profile == null) return Result.success()
         val before = app.graph.repository.current()
         runCatching { app.checkRunner.run(foreground = false) }
