@@ -20,6 +20,9 @@ kotlin {
 
     compilerOptions {
         optIn.add("kotlin.time.ExperimentalTime")
+        optIn.add("kotlin.uuid.ExperimentalUuidApi")
+        optIn.add("androidx.compose.material3.ExperimentalMaterial3Api")
+        optIn.add("androidx.compose.foundation.layout.ExperimentalLayoutApi")
     }
 
     listOf(iosArm64(), iosSimulatorArm64()).forEach { target ->
@@ -55,6 +58,7 @@ kotlin {
         }
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
+            implementation(libs.androidx.core.ktx)
         }
     }
 }

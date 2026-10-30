@@ -1,4 +1,265 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Eh-ligible</string>
+
+    <!-- Common -->
+    <string name="action_continue">Continue</string>
+    <string name="action_back">Back</string>
+    <string name="action_save">Save</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_done">Done</string>
+    <string name="action_ok">OK</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_not_now">Not now</string>
+    <string name="action_pick_date">Pick a date</string>
+    <string name="range_from">From</string>
+    <string name="range_to">To</string>
+    <string name="widget_setup">Open Eh-ligible to start your countdown</string>
+    <string name="disclaimer_short">Not affiliated with IRCC or the Government of Canada. Estimates only: always confirm with IRCC’s official tools before applying.</string>
+    <string name="leaf_description">Maple leaf, %1$s percent full</string>
+
+    <!-- Onboarding -->
+    <string name="onb_welcome_title">Your countdown to Canadian citizenship</string>
+    <string name="onb_welcome_body">Eh-ligible counts the days until you can apply, using the official rule: 1,095 days in Canada in the 5 years before you apply. It notices your trips by itself, right on your phone.</string>
+    <string name="onb_welcome_start">Let’s go</string>
+    <string name="onb_pr_title">When did you become a permanent resident?</string>
+    <string name="onb_pr_body">The date on your Confirmation of Permanent Residence (COPR): the day you landed or were approved in Canada.</string>
+    <string name="onb_status_title">Before that, were you in Canada with status?</string>
+    <string name="onb_status_body">Each day as a visitor, student, worker or protected person in the 5-year window counts as half a day, up to 365 days.</string>
+    <string name="onb_status_yes">Yes, I was</string>
+    <string name="onb_status_no">No, I landed as a PR</string>
+    <string name="onb_status_since">My first status began on</string>
+    <string name="onb_status_since_hint">For protected persons, use the date your claim was approved.</string>
+    <string name="onb_status_gaps_title">Any time without status?</string>
+    <string name="onb_status_gaps_body">Add periods without status, or spent waiting for a refugee claim decision. They don’t count. Maintained status (waiting on an extension) does count. If you’re unsure about a period, IRCC says to leave it out.</string>
+    <string name="onb_status_add_gap">Add a period without status</string>
+    <string name="onb_trips_title">Trips outside Canada</string>
+    <string name="onb_trips_body">List your trips since %1$s, day trips included. From today on, Eh-ligible notices new trips by itself.</string>
+    <string name="onb_trips_none">I haven’t left Canada</string>
+    <string name="onb_location_title">Let Eh-ligible notice your trips</string>
+    <string name="onb_location_body">Eh-ligible uses your approximate location to check which country you’re in when you open the app or tap the widget, so trips are counted automatically. The check happens on your phone: your location is never stored or sent anywhere.</string>
+    <string name="onb_location_allow">Use approximate location</string>
+    <string name="onb_location_decline">No thanks</string>
+    <string name="onb_location_on">Location checks are on. Thank you!</string>
+    <string name="onb_notifications_title">Little celebrations?</string>
+    <string name="onb_notifications_body">Get a nudge at milestones, on the day you can apply, and when a trip needs checking. A few a month at most.</string>
+    <string name="onb_notifications_allow">Yes, notify me</string>
+    <string name="onb_done_title">You’re all set!</string>
+    <string name="onb_done_widget">Tip: add the Eh-ligible widget to your home screen to see your countdown every day.</string>
+    <string name="action_add_widget">Add the widget to your home screen</string>
+    <string name="onb_done_button">Show my countdown</string>
+    <string name="onb_step">Step %1$d of %2$d</string>
+
+    <!-- Home -->
+    <plurals name="home_days_to_go">
+        <item quantity="one">day to go</item>
+        <item quantity="other">days to go</item>
+    </plurals>
+    <string name="home_apply_from">Apply from %1$s</string>
+    <string name="home_safer_date">Safer date: %1$s</string>
+    <string name="home_exact_date">First possible day: %1$s</string>
+    <string name="home_counted">%1$s of %2$s days counted</string>
+    <string name="home_eligible_title">You can apply!</string>
+    <string name="home_eligible_body">You have enough days to apply for citizenship. IRCC encourages applying with a few extra days, just in case.</string>
+    <string name="home_apply_link">Apply on IRCC’s website</string>
+    <string name="home_not_reachable">No date in the next 15 years. Check your trips.</string>
+    <string name="home_trips">Trips</string>
+    <string name="home_checklist">Ready to apply?</string>
+    <string name="home_settings">Settings</string>
+    <string name="home_fun_fact">Did you know?</string>
+    <plurals name="home_review_banner">
+        <item quantity="one">%1$d day needs your review</item>
+        <item quantity="other">%1$d days need your review</item>
+    </plurals>
+    <string name="home_review_action">Review</string>
+    <string name="status_in_canada">In Canada</string>
+    <string name="status_abroad">Abroad: %1$s</string>
+    <string name="status_abroad_unknown">Abroad</string>
+    <string name="status_near_border">Near the border</string>
+    <string name="status_unknown">Not checked recently</string>
+    <string name="status_paused">Countdown paused. Enjoy your trip!</string>
+
+    <!-- Journal -->
+    <string name="journal_title">Trips</string>
+    <string name="journal_empty">No trips yet. Add past or planned trips with the button below.</string>
+    <string name="journal_planned">Planned</string>
+    <string name="journal_current">Happening now</string>
+    <string name="journal_past">Past trips</string>
+    <string name="journal_add">Add trip</string>
+    <string name="journal_export">Export</string>
+    <string name="journal_export_share">Share as text</string>
+    <string name="journal_export_csv">Save as spreadsheet (CSV)</string>
+    <string name="journal_export_saved">Trip list saved</string>
+    <string name="journal_rule">The day you leave and the day you come back both count as days in Canada. Only full days away are subtracted.</string>
+    <plurals name="trip_days_away">
+        <item quantity="one">%1$d full day away</item>
+        <item quantity="other">%1$d full days away</item>
+    </plurals>
+    <string name="trip_same_day">Same-day trip: counts as a day in Canada</string>
+    <string name="trip_detected">Detected</string>
+    <string name="trip_planned">Planned</string>
+    <string name="trip_needs_review">Needs review</string>
+    <string name="trip_ongoing">Still away</string>
+    <string name="trip_editor_new">New trip</string>
+    <string name="trip_editor_edit">Edit trip</string>
+    <string name="trip_left">Left Canada</string>
+    <string name="trip_returned">Back in Canada</string>
+    <string name="trip_destination">Destination</string>
+    <string name="trip_reason">Reason</string>
+    <string name="trip_reason_hint">e.g., vacation, family, work</string>
+    <string name="trip_planned_note">This trip is in the future. It shows how your dates would move.</string>
+    <string name="trip_delete_confirm">Delete this trip?</string>
+    <string name="trip_return_before_departure">The return date can’t be before the departure date.</string>
+    <string name="export_subject">My trips outside Canada</string>
+    <string name="export_col_left">Date left Canada</string>
+    <string name="export_col_returned">Date returned</string>
+    <string name="export_col_destination">Destination</string>
+    <string name="export_col_reason">Reason</string>
+    <string name="export_col_days">Full days absent</string>
+    <string name="export_ongoing">Still away</string>
+
+    <!-- Review -->
+    <string name="review_title">Review days</string>
+    <string name="review_body">Eh-ligible couldn’t tell where you were on these days. Until you answer, they count as days outside Canada.</string>
+    <string name="review_in_canada">In Canada</string>
+    <string name="review_away">Away</string>
+    <string name="review_all_away">Mark all as away</string>
+    <string name="review_done">All caught up!</string>
+
+    <!-- Checklist -->
+    <string name="checklist_title">Ready to apply?</string>
+    <string name="checklist_presence">1,095 days in Canada</string>
+    <string name="checklist_presence_done">Done: you have enough days.</string>
+    <string name="checklist_presence_todo">Not yet: %1$s.</string>
+    <string name="checklist_pr">Valid permanent resident status</string>
+    <string name="checklist_pr_body">No removal order and no unmet conditions. An expired PR card is fine.</string>
+    <string name="checklist_taxes">Tax returns filed</string>
+    <string name="checklist_taxes_body">For at least 3 of these years, if you had to file: %1$s.</string>
+    <string name="checklist_language">Language proof (CLB/NCLC 4)</string>
+    <string name="checklist_language_body">Speaking and listening in English or French, if you’re 18 to 54 on the day you sign.</string>
+    <string name="checklist_test">Citizenship test</string>
+    <string name="checklist_test_body">Also for ages 18 to 54: 20 questions, pass mark 15.</string>
+    <string name="checklist_age_not_needed">Not needed at your age.</string>
+    <string name="checklist_age_maybe">Depends on your exact birthday.</string>
+    <string name="checklist_birth_year">Birth year (optional)</string>
+    <string name="checklist_fee">Application fee</string>
+    <string name="checklist_fee_body">$653 for adults (2026). IRCC updates fees every March 31.</string>
+    <string name="checklist_prohibitions">Nothing that bars you</string>
+    <string name="checklist_prohibitions_body">For example: no current charges, sentence or recent conviction for a serious offence, and no recent misrepresentation.</string>
+    <string name="checklist_links">Official information</string>
+    <string name="checklist_link_who">Who can apply (IRCC)</string>
+    <string name="checklist_link_calculator">IRCC physical presence calculator</string>
+    <string name="checklist_all_done">Everything ticked!</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_countdown">Countdown</string>
+    <string name="settings_margin">Safety margin</string>
+    <string name="settings_margin_body">Extra days added to get your safer date. IRCC encourages applying with more than 1,095 days.</string>
+    <plurals name="settings_margin_value">
+        <item quantity="one">%1$d day</item>
+        <item quantity="other">%1$d days</item>
+    </plurals>
+    <string name="settings_target">Count down to</string>
+    <string name="settings_target_exact">First possible day</string>
+    <string name="settings_target_safer">Safer date</string>
+    <string name="settings_notifications">Notifications</string>
+    <string name="settings_notifications_body">Milestones, eligibility day and trip checks</string>
+    <string name="settings_location">Location checks</string>
+    <string name="settings_location_on">Approximate location is on</string>
+    <string name="settings_location_off">Off: only the mobile network is used</string>
+    <string name="settings_location_turn_on">Turn on</string>
+    <string name="settings_profile">Your details</string>
+    <string name="settings_pr_date">PR date</string>
+    <string name="settings_status_date">Status before PR since</string>
+    <string name="settings_status_none">None</string>
+    <string name="settings_backup">Backup</string>
+    <string name="settings_backup_export">Save a backup file</string>
+    <string name="settings_backup_import">Restore from a backup file</string>
+    <string name="settings_backup_import_confirm">Replace everything in the app with this backup?</string>
+    <string name="settings_backup_saved">Backup saved</string>
+    <string name="settings_backup_restored">Backup restored</string>
+    <string name="settings_backup_invalid">That file isn’t an Eh-ligible backup.</string>
+    <string name="settings_about">About</string>
+    <string name="settings_privacy">Privacy policy</string>
+    <string name="settings_source">Source code</string>
+    <string name="settings_version">Version %1$s</string>
+    <string name="settings_credits">Border data: made with Natural Earth (public domain).</string>
+    <string name="settings_rare_cases">Under 18, a Crown servant or Canadian Armed Forces member abroad, or had probation, parole or a sentence in the last 5 years? Eh-ligible doesn’t cover these cases. Please use IRCC’s calculator.</string>
+
+    <!-- Milestones -->
+    <string name="milestone_QUARTER">A quarter of the way there!</string>
+    <string name="milestone_HALFWAY">Halfway there!</string>
+    <string name="milestone_THREE_QUARTERS">Three quarters done!</string>
+    <string name="milestone_DAYS_LEFT_100">100 days to go!</string>
+    <string name="milestone_DAYS_LEFT_30">One month to go!</string>
+    <string name="milestone_DAYS_LEFT_7">One week left!</string>
+    <string name="milestone_DAYS_LEFT_1">Tomorrow’s the day!</string>
+    <string name="milestone_ELIGIBLE">You can apply for citizenship today!</string>
+
+    <!-- Notifications -->
+    <string name="notif_channel_milestones">Milestones</string>
+    <string name="notif_channel_trips">Trips</string>
+    <string name="notif_travelling_title">Looks like you’re travelling ✈️</string>
+    <string name="notif_travelling_body">Your countdown is paused while you’re away. Have a great trip!</string>
+    <string name="notif_review_title">A few days need your review</string>
+    <string name="notif_review_body">Tap to tell Eh-ligible where you were.</string>
+    <plurals name="notif_days_to_go">
+        <item quantity="one">%1$d day to go.</item>
+        <item quantity="other">%1$d days to go.</item>
+    </plurals>
+    <string name="notif_eligible_body">Open Eh-ligible for your checklist.</string>
+
+    <!-- Fun: {n} is replaced with the number of days -->
+    <string-array name="one_liners">
+        <item>{n} sleeps until you can apply, eh!</item>
+        <item>{n} days to go. Keep calm and poutine on.</item>
+        <item>Only {n} days left of being almost Canadian.</item>
+        <item>{n} days. A good time to practise saying sorry.</item>
+        <item>{n} days to go. The beavers believe in you.</item>
+        <item>{n} days left. Maple syrup reserves: holding steady.</item>
+        <item>{n} more days. You’re doing great, bud.</item>
+        <item>Counting down: {n} days. Eh-mazing progress.</item>
+        <item>{n} days until citizenship o’clock.</item>
+        <item>{n} days to go. Toque on, chin up.</item>
+    </string-array>
+    <string name="one_liner_soon">{n} days! Time to dust off your documents.</string>
+    <string name="one_liner_abroad">Countdown paused. Enjoy the trip! It picks back up when you’re home.</string>
+    <string name="one_liner_eligible">You did it. Go get that citizenship!</string>
+
+    <string-array name="fun_facts">
+        <item>Canada has the longest coastline of any country: about 243,000 km.</item>
+        <item>Canada is the second-largest country in the world by area.</item>
+        <item>The Canada–US border is the longest international border in the world, at about 8,890 km.</item>
+        <item>The maple leaf flag was first raised on February 15, 1965.</item>
+        <item>“O Canada” became the official national anthem in 1980.</item>
+        <item>Canada has 10 provinces and 3 territories. The newest, Nunavut, was created in 1999.</item>
+        <item>Canada holds about 20% of the world’s fresh water.</item>
+        <item>The beaver has been an official symbol of Canada since 1975.</item>
+        <item>Canada’s motto, “A mari usque ad mare”, means “From sea to sea”.</item>
+        <item>Canada borders three oceans: the Atlantic, the Pacific and the Arctic.</item>
+        <item>Basketball was invented in 1891 by a Canadian, James Naismith.</item>
+        <item>Insulin was discovered in Toronto in 1921 by Frederick Banting and Charles Best.</item>
+        <item>Canada’s highest mountain is Mount Logan in Yukon, at 5,959 m.</item>
+        <item>Lacrosse is Canada’s national summer sport and hockey its national winter sport.</item>
+        <item>Wood Buffalo National Park is bigger than Switzerland.</item>
+        <item>Canada has more lakes than any other country.</item>
+        <item>Churchill, Manitoba is known as the Polar Bear Capital of the World.</item>
+        <item>The Bay of Fundy has the highest tides in the world, up to about 16 m.</item>
+        <item>Toronto’s CN Tower was the world’s tallest free-standing structure for over 30 years.</item>
+        <item>Canada Day, July 1, marks Confederation in 1867.</item>
+        <item>Poutine, fries with cheese curds and gravy, comes from rural Quebec.</item>
+        <item>Quebec produces about 70% of the world’s maple syrup.</item>
+        <item>In winter, the Rideau Canal in Ottawa becomes a 7.8 km skating rink.</item>
+        <item>Canada’s population passed 40 million in 2023.</item>
+        <item>Canada has six time zones, including Newfoundland’s half-hour one.</item>
+        <item>The $1 coin, the loonie, arrived in 1987. The $2 toonie followed in 1996.</item>
+        <item>Queen Victoria chose Ottawa as Canada’s capital in 1857.</item>
+        <item>Banff, created in 1885, is Canada’s first national park.</item>
+        <item>The schooner Bluenose sails on the back of the Canadian dime.</item>
+        <item>Canada’s coldest recorded temperature was −63 °C, in Snag, Yukon, in 1947.</item>
+        <item>Most of Niagara’s Horseshoe Falls is on the Canadian side.</item>
+        <item>English and French are both official languages of Canada.</item>
+    </string-array>
 </resources>

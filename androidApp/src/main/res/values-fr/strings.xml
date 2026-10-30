@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Eh-ligible</string>
+    <string name="widget_name">Compte à rebours citoyenneté</string>
+    <string name="widget_description">Jours restants avant de pouvoir demander la citoyenneté canadienne</string>
 </resources>

@@ -5,6 +5,11 @@ plugins {
     alias(libs.plugins.composeCompiler)
 }
 
+// Staged Play launch (docs/SPEC.md): background location is only compiled in when this is true.
+val backgroundLocation = providers.gradleProperty(
+    "ehligible.backgroundLocation",
+).map(String::toBoolean).getOrElse(false)
+
 android {
     namespace = "io.github.mirhamedjz.ehligible"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
@@ -16,6 +21,7 @@ android {
         versionCode = 1
         versionName = "0.1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("boolean", "BACKGROUND_LOCATION", backgroundLocation.toString())
     }
 
     buildFeatures {
@@ -67,6 +73,12 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.compose.ui)
     implementation(libs.compose.uiToolingPreview)
+    implementation(libs.compose.components.resources)
+    implementation(libs.androidx.glance.appwidget)
+    implementation(libs.androidx.work.runtime)
+    implementation(libs.play.services.location)
+    implementation(libs.kotlinx.coroutines.play.services)
+    implementation(libs.okio)
 
     testImplementation(libs.junit)
     testImplementation(libs.robolectric)
