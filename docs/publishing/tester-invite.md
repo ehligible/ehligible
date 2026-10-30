@@ -17,6 +17,8 @@ Google needs a few people to test it for two weeks before it can go public. Coul
 2. Install Eh-ligible from the Play Store page it shows.
 3. Keep it installed for **14 days**. You don't need to be a PR; any date works for trying it.
 
+What to try (10 minutes): https://github.com/ehligible/ehligible/blob/main/docs/testing/device-checklist.md
+
 If something looks off or you have ideas, just reply. Thank you! 🍁
 
 ---
@@ -32,5 +34,7 @@ Google demande que quelques personnes la testent pendant deux semaines avant la 
 1. Ouvre ce lien sur ton téléphone Android et touche **Devenir testeur** : `<OPT-IN LINK>`
 2. Installe Eh-ligible depuis la page Play Store qui s'affiche.
 3. Garde-la installée pendant **14 jours**. Pas besoin d'être RP : n'importe quelle date permet de l'essayer.
+
+Quoi essayer (10 minutes, en anglais) : https://github.com/ehligible/ehligible/blob/main/docs/testing/device-checklist.md
 
 Si quelque chose cloche ou si tu as des idées, réponds-moi. Merci! 🍁
