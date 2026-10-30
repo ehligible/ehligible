@@ -1,0 +1,25 @@
+Eh-ligible fait le décompte des jours avant que vous puissiez demander la citoyenneté canadienne, directement sur votre écran d'accueil.
+
+🍁 COMMENT ÇA MARCHE
+• Indiquez la date où vous êtes devenu résident permanent et vos voyages depuis.
+• Eh-ligible applique la règle de présence physique : 1 095 jours au Canada au cours des 5 années précédant la demande.
+• Comme IRCC, il compte le jour du départ et le jour du retour comme des jours au Canada, et il ajoute le crédit d'une demi-journée pour le temps passé au Canada comme étudiant, travailleur, visiteur ou personne protégée avant la résidence permanente (jusqu'à 365 jours).
+
+✈️ DES VOYAGES DÉTECTÉS AUTOMATIQUEMENT
+Quand vous ouvrez l'application ou touchez le widget, Eh-ligible vérifie dans quel pays vous êtes à l'aide de votre position approximative et de votre réseau mobile. La vérification se fait sur votre téléphone : votre position n'est jamais conservée ni envoyée. S'il ne peut pas savoir où vous étiez un jour donné, il vous le demande au lieu de deviner.
+
+📱 UN WIDGET QUI VOUS MOTIVE
+Une feuille d'érable se remplit à mesure que vous approchez du but, avec le nombre de jours restants et la date où vous pourrez présenter votre demande.
+
+✨ ET PLUS ENCORE
+• Planifiez un voyage et voyez comment il déplacerait votre date avant de réserver.
+• Un journal de voyages à exporter avec les colonnes demandées dans la demande de citoyenneté.
+• Une liste « Prêt pour la demande? » : impôts, langue, examen et frais.
+• Une marge de sécurité, car IRCC encourage à présenter la demande avec plus de 1 095 jours.
+• Des étapes, des confettis et un fait canadien amusant chaque jour.
+• En français et en anglais. Gratuit, sans publicité, sans compte et sans pistage.
+
+🔒 CONFIDENTIALITÉ
+Tout reste sur votre appareil. Aucun compte, aucun serveur, aucune analyse.
+
+ℹ️ Eh-ligible est une application indépendante. Elle n'a aucun lien avec Immigration, Réfugiés et Citoyenneté Canada (IRCC) ni avec le gouvernement du Canada. Elle donne une estimation fondée sur les règles publiques publiées sur canada.ca. Vérifiez toujours avec les outils officiels d'IRCC avant de présenter votre demande.

@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -45,6 +46,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
@@ -325,8 +327,16 @@ private fun TripsStep(viewModel: AppViewModel, today: LocalDate, next: () -> Uni
         primaryEnabled = draft.noTrips || draft.trips.isNotEmpty(),
         onBack = back,
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Checkbox(checked = draft.noTrips, onCheckedChange = { draft.noTrips = it })
+        // The whole row toggles, not just the small box.
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .toggleable(value = draft.noTrips, role = Role.Checkbox, onValueChange = { draft.noTrips = it })
+                .padding(vertical = 4.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Checkbox(checked = draft.noTrips, onCheckedChange = null)
+            Spacer(Modifier.size(12.dp))
             Text(stringResource(Res.string.onb_trips_none))
         }
         if (!draft.noTrips) {

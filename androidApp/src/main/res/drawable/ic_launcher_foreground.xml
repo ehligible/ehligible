@@ -1,17 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Placeholder maple leaf; the final icon is designed in M7. -->
+<!-- The Eh-ligible mark: a softened, tilted maple leaf inside an open countdown ring.
+     Leaf geometry matches core/.../brand/LeafShape.kt. Everything stays inside the 66dp safe zone. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+    <!-- Countdown ring, open at the top right (r = 29, from -50° clockwise to 210°). -->
+    <path
+        android:pathData="M72.64,31.79 A29,29 0 1,1 28.89,39.5"
+        android:strokeWidth="4"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeLineCap="round" />
     <group
-        android:scaleX="0.54"
-        android:scaleY="0.54"
-        android:translateX="27"
-        android:translateY="26">
-        <path
-            android:fillColor="#FFFFFF"
-            android:pathData="M50,4 L57,18 L65,14 L62,36 L80,22 L84,32 L96,30 L88,48 L94,54 L70,70 L73,80 L53,77 L53,97 L47,97 L47,77 L27,80 L30,70 L6,54 L12,48 L4,30 L16,32 L20,22 L38,36 L35,14 L43,18 Z" />
+        android:pivotX="54"
+        android:pivotY="55"
+        android:rotation="-12">
+        <group
+            android:scaleX="0.40"
+            android:scaleY="0.40"
+            android:translateX="34"
+            android:translateY="34.8">
+            <path
+                android:fillColor="#FFFFFFFF"
+                android:pathData="M50,4 L57,18 L65,14 L62,36 L80,22 L84,32 L96,30 L88,48 L94,54 L70,70 L73,80 L53,77 L53,97 L47,97 L47,77 L27,80 L30,70 L6,54 L12,48 L4,30 L16,32 L20,22 L38,36 L35,14 L43,18 Z"
+                android:strokeWidth="6"
+                android:strokeColor="#FFFFFFFF"
+                android:strokeLineJoin="round" />
+        </group>
     </group>
 </vector>

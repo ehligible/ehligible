@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Approximate location only: Eh-ligible never asks for precise location. -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!-- WorkManager's foreground service is never used: drop it so no foreground-service declaration applies. -->
+    <uses-permission
+        android:name="android.permission.FOREGROUND_SERVICE"
+        tools:node="remove" />
 
     <application
         android:name=".EhligibleApp"
@@ -38,6 +44,10 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/countdown_widget_info" />
         </receiver>
+
+        <service
+            android:name="androidx.work.impl.foreground.SystemForegroundService"
+            tools:node="remove" />
 
         <receiver
             android:name=".detection.SystemEventsReceiver"
