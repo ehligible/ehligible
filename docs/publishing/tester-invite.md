@@ -1,6 +1,27 @@
 # Tester invitation
 
-Send this to ~15 friends with Android phones (Google requires 12 testers who stay opted in for 14 days in a row).
+Two messages to ~15 friends with Android phones (Google requires 12 testers who stay opted in for 14 days in a
+row): a heads-up now to collect their emails, then the invitation once the closed test exists.
+
+## 1. Heads-up (while the developer account is being verified)
+
+**English**
+
+Hi! I built a small Android app called **Eh-ligible**: a countdown to Canadian citizenship for permanent
+residents, with a home-screen widget. Before it can go public, Google needs about 15 people to test it for two
+weeks. Could you be one of them? It's free and takes a few minutes. If yes, send me the email of the Google
+account you use for the Play Store on your Android phone. I'll send you a link in a few days.
+
+**Français**
+
+Salut! J'ai créé une petite application Android, **Eh-ligible** : un compte à rebours vers la citoyenneté
+canadienne pour les résidents permanents, avec un widget pour l'écran d'accueil. Avant la publication, Google
+demande qu'une quinzaine de personnes la testent pendant deux semaines. Pourrais-tu en faire partie? C'est gratuit
+et ça prend quelques minutes. Si oui, envoie-moi l'adresse du compte Google que tu utilises pour le Play Store sur
+ton téléphone Android. Je t'enverrai un lien dans quelques jours.
+
+## 2. Invitation (once the closed test is approved)
+
 Replace `<OPT-IN LINK>` with the link from Play Console → Closed testing → Testers.
 
 ---
