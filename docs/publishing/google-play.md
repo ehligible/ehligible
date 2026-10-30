@@ -6,13 +6,10 @@ release: the first review, then the 14-day closed test, then the production revi
 
 ## 0. Before you start (one time)
 
-1. **GitHub repo** (if not done yet), from this folder:
-   ```
-   gh repo create MirHamed-JZ/ehligible --public --source . --remote origin --push --description "Eh-ligible: a home-screen countdown to Canadian citizenship. Not affiliated with IRCC."
-   ```
-2. **Website for the privacy policy:** on GitHub, open the repo → Settings → Pages → *Build and deployment* →
-   Source: **GitHub Actions**. The `Website` workflow then publishes `site/` to
-   `https://mirhamed-jz.github.io/ehligible/` (privacy policy: `.../privacy.html`). Check that both pages load.
+1. **GitHub:** the app lives in the organization `ehligible` (repo `ehligible/ehligible`).
+2. **Website for the privacy policy:** the repo `ehligible/ehligible.github.io` is published by GitHub Pages at
+   `https://ehligible.github.io/` (privacy policy: `https://ehligible.github.io/privacy.html`). Check that both
+   pages load.
 3. **Back up the upload key.** `C:\Users\mirha\.ehligible\` holds `upload-keystore.jks` and
    `keystore.properties` (its password). Copy both to a password manager or another safe place. If they're lost,
    Google can reset the upload key (Play App Signing), but it takes days.
@@ -64,13 +61,13 @@ Play Console → **Create app**:
 Then **Add translation → French (Canada) – fr-CA** with the files under `listings/fr-CA/`.
 
 **Store settings:** category **Productivity**, contact email `jafarzadeh.mirhamed@gmail.com`, website
-`https://mirhamed-jz.github.io/ehligible/`.
+`https://ehligible.github.io/`.
 
 ## 4. App content (Policy → App content)
 
 | Section | Answer |
 |---|---|
-| Privacy policy | `https://mirhamed-jz.github.io/ehligible/privacy.html` |
+| Privacy policy | `https://ehligible.github.io/privacy.html` |
 | Ads | No, the app has no ads |
 | App access | All functionality is available without special access (no login) |
 | Content rating | Category *Utility, Productivity, Communication, or Other*; answer **No** to every content question (no violence, sexual content, gambling, user-to-user communication or location sharing with other users) |

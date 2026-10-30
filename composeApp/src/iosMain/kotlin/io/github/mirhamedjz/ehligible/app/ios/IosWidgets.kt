@@ -16,7 +16,7 @@ import platform.Foundation.writeToURL
 /** Writes the [widgetSnapshot] where the widget extension can read it: the shared App Group container. */
 internal object IosWidgets {
     /** Must match `iosApp/project.yml` and `iosApp/EhligibleWidget/WidgetSnapshot.swift`. */
-    private const val APP_GROUP = "group.io.github.mirhamedjz.ehligible"
+    private const val APP_GROUP = "group.io.github.ehligible.app"
     private const val FILE_NAME = "widget.json"
 
     @OptIn(BetaInteropApi::class, ExperimentalForeignApi::class)

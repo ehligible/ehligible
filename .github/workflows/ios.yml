@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  BUNDLE_ID: io.github.mirhamedjz.ehligible
+  BUNDLE_ID: io.github.ehligible.app
 
 jobs:
   simulator:

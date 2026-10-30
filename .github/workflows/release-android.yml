@@ -71,7 +71,7 @@ jobs:
         uses: r0adkll/upload-google-play@v1.1.5
         with:
           serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
-          packageName: io.github.mirhamedjz.ehligible
+          packageName: io.github.ehligible.app
           releaseFiles: androidApp/build/outputs/bundle/release/*.aab
           mappingFile: androidApp/build/outputs/mapping/release/mapping.txt
           track: ${{ inputs.track || 'alpha' }}

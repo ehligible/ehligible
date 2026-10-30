@@ -35,7 +35,7 @@ struct WidgetSnapshot: Codable, Equatable {
     }
 
     /// Must match `iosApp/project.yml` and Kotlin's `IosWidgets`.
-    static let appGroup = "group.io.github.mirhamedjz.ehligible"
+    static let appGroup = "group.io.github.ehligible.app"
     static let fileName = "widget.json"
 
     static func decode(_ data: Data) throws -> WidgetSnapshot {
