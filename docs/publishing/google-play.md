@@ -97,7 +97,7 @@ the listing and release-note texts, and the two `gradle.properties` lines to cha
 3. **Countries:** Canada (add others if testers live elsewhere).
 4. **Create release:**
    - Accept **Play App Signing** (Google keeps the app-signing key; you keep the upload key).
-   - Upload the bundle. The **first upload must be manual**: `C:\DevProjects\ehligible-release.0.0\ehligible-1.0.0.aab`
+   - Upload the bundle. The **first upload must be manual**: `C:\DevProjects\ehligible-release\1.0.0\ehligible-1.0.0.aab`
      is signed and tested (see the `README.txt` next to it). To make a new one: the *Android* workflow keeps the
      unsigned bundle as the `ehligible-v1.0-unsigned` artifact; download it and sign it on this PC with
      `tools/release/sign.sh` (a local `./gradlew :androidApp:bundleRelease` runs out of memory on this PC). Once the

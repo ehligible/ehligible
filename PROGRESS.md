@@ -31,7 +31,7 @@ Checkpoint for resuming work (e.g., after a usage limit). Update at the end of e
 
 ## Current step
 All build work is done; what's left needs the owner (below).
-- The signed v1.0 release is ready for the first Play upload: `C:\DevProjects\ehligible-release.0.0\`
+- The signed v1.0 release is ready for the first Play upload: `C:\DevProjects\ehligible-release\1.0.0\`
   (`.aab` + `.apk`, built by CI from commit 4612559, signed locally with `tools/release/sign.sh`). The release
   APK was tested on the emulator on 2026-10-30: onboarding, permissions, data after a restart, the widget,
   WorkManager jobs; no crashes. Rebuild it if the app changes before the upload.
