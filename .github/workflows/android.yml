@@ -35,7 +35,17 @@ jobs:
 
       # Release builds run R8, which can break code that debug builds never exercise. Unsigned here.
       - name: Build release (v1.0, no background location)
-        run: ./gradlew --console=plain :androidApp:assembleRelease
+        run: ./gradlew --console=plain :androidApp:assembleRelease :androidApp:bundleRelease
+
+      # Unsigned: sign it with the upload key elsewhere (R8 needs more memory than the owner's PC can spare).
+      - name: Upload unsigned v1.0 release
+        uses: actions/upload-artifact@v7
+        with:
+          name: ehligible-v1.0-unsigned
+          path: |
+            androidApp/build/outputs/apk/release/*.apk
+            androidApp/build/outputs/bundle/release/*.aab
+          retention-days: 14
 
       - name: Build release (v1.1, with background location)
         run: ./gradlew --console=plain :androidApp:assembleRelease -Pehligible.backgroundLocation=true
