@@ -123,7 +123,7 @@ countdown paused", "A few days need your review".
 
 ## Release plan (Google Play)
 
-1. Personal account (owner pays US$25), developer name "Eh-ligible"; legal name, country, and
+1. Personal account (owner pays US$25), developer name "Hamed JZ" (personal, so it fits future apps too; changeable); legal name, country, and
    `jafarzadeh.mirhamed@gmail.com` are public.
 2. Closed test v1.0 **without** background location → starts the 14-day / 12-tester clock (~15 testers).
 3. Update v1.1 adds background location + Permissions declaration (one feature: automatic daily presence

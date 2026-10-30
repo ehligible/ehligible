@@ -27,7 +27,8 @@ release: the first review, then the 14-day closed test, then the production revi
 1. Go to <https://play.google.com/console/signup> and choose a **personal** account.
 2. Pay the one-time **US$25** fee, verify your identity (government ID) and contact details.
 3. In the **Play Console app** on your Android phone, verify the device (Android 10 or newer).
-4. Developer name: **Eh-ligible**. Contact email: `jafarzadeh.mirhamed@gmail.com`.
+4. Developer name: **Hamed JZ** (shown under every app of the account; it can be changed later). Contact email:
+   `jafarzadeh.mirhamed@gmail.com`.
    Your legal name, country and this email are shown on the store page (your address and phone are not, since the
    app is free).
 5. When asked (from November 2026) about **trader status** under the EU Digital Services Act: you are **not a
