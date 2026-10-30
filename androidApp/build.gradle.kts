@@ -10,6 +10,7 @@ plugins {
 val backgroundLocation = providers.gradleProperty(
     "ehligible.backgroundLocation",
 ).map(String::toBoolean).getOrElse(false)
+val appVersionName = providers.gradleProperty("ehligible.versionName").getOrElse("1.0.0")
 
 // Release signing (Play upload key). CI passes EHLIGIBLE_* environment variables; locally the values come from
 // ~/.ehligible/keystore.properties. Neither is ever committed. Without them, release builds are unsigned.
@@ -32,7 +33,7 @@ android {
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         // CI sets the version code from the run number; local builds use 1.
         versionCode = providers.gradleProperty("ehligible.versionCode").map(String::toInt).getOrElse(1)
-        versionName = "1.0.0"
+        versionName = appVersionName
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("boolean", "BACKGROUND_LOCATION", backgroundLocation.toString())
     }
@@ -80,6 +81,15 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+}
+
+androidComponents {
+    onVariants { variant ->
+        // Adds ACCESS_BACKGROUND_LOCATION, so builds without the switch can never declare it.
+        if (backgroundLocation) {
+            variant.sources.manifests.addStaticManifestFile("src/backgroundLocation/AndroidManifest.xml")
         }
     }
 }
