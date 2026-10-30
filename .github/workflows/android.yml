@@ -31,6 +31,13 @@ jobs:
       - name: Format, lint, test, build debug APK
         run: ./gradlew --console=plain check :androidApp:assembleDebug
 
+      # Release builds run R8, which can break code that debug builds never exercise. Unsigned here.
+      - name: Build release (v1.0, no background location)
+        run: ./gradlew --console=plain :androidApp:assembleRelease
+
+      - name: Build release (v1.1, with background location)
+        run: ./gradlew --console=plain :androidApp:assembleRelease -Pehligible.backgroundLocation=true
+
       - name: Upload debug APK
         uses: actions/upload-artifact@v7
         with:
