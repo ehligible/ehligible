@@ -8,9 +8,10 @@ Checkpoint for resuming work (e.g., after a usage limit). Update at the end of e
 3. Continue with the first unchecked item below.
 
 ## Milestones
-- [~] M0 Repo, docs, GitHub — local repo done; **public GitHub repo blocked**: the owner must run
-      `gh repo create MirHamed-JZ/ehligible --public --source . --remote origin --push` (auto-mode denied it for Claude)
-- [x] M1 Gradle KMP/CMP skeleton + Android CI (workflow written; runs once the repo exists)
+- [x] M0 Repo, docs, GitHub — https://github.com/MirHamed-JZ/ehligible (public, created 2026-10-30 at the
+      owner's request); Pages from Actions: https://mirhamed-jz.github.io/ehligible/; homepage + topics set.
+      Release secrets (upload keystore) not set yet: they wait for the Play account (`docs/publishing/google-play.md`).
+- [x] M1 Gradle KMP/CMP skeleton + Android CI
 - [x] M2 Rules engine (TDD) — IRCC worked examples, mutation-checked
 - [x] M3 Presence model, inference, trips, export, backup codec, DataStore repository, border index
 - [x] M4 Shared Compose UI (EN/FR) + fun touches (maple-leaf progress, confetti, one-liners, fun facts)
@@ -26,8 +27,9 @@ Checkpoint for resuming work (e.g., after a usage limit). Update at the end of e
 ## Current step
 M9 — iOS app written (branch `feat/ios`, merged): Kotlin side compiled on Windows; Swift side (XcodeGen project,
 SwiftUI app shell, WidgetKit widget + tests) can only be compiled by the `iOS` workflow on macOS, which needs the
-GitHub repo. **First CI run will likely need fixes**: check the `iOS` workflow when the repo exists, then fix
-until green (screenshots are uploaded as artifacts).
+GitHub repo, which now exists: the first `iOS` run started 2026-10-30. Fix until green (screenshots are uploaded
+as artifacts). Don't push while a run is in progress unless it should be cancelled (workflows cancel in-progress
+runs on the same branch).
 
 Still to re-verify locally: the signed release builds since the M8/M9 changes (R8). Run
 `./gradlew :androidApp:assembleRelease`, then again with `-Pehligible.backgroundLocation=true
@@ -51,7 +53,6 @@ stopped for low memory: build with the emulator closed, then start it for the sm
 - Emulator helpers: `$LOCALAPPDATA/Temp/ehligible-ref/adbui.sh` (AVD `ehligible_pixel8`).
 
 ## Waiting on the owner
-- Create the public GitHub repo (command above), then the Pages site and release secrets can be set up.
 - Create the Google Play Console personal account (identity verification takes days).
 - Line up ~15 Android testers (`docs/publishing/tester-invite.md`).
 - Connect the Android phone with USB debugging when asked (M10).
