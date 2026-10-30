@@ -30,10 +30,12 @@ Checkpoint for resuming work (e.g., after a usage limit). Update at the end of e
 - [ ] M10 Real-device test on the owner's Android phone (needs the owner)
 
 ## Current step
-All build work is done; what's left needs the owner (below). Optional when picking this up again:
-- A runtime smoke test of the signed release APK on the emulator (CI builds both release variants with R8 on
-  every push, but doesn't run them). Close other apps first: a local release build plus the emulator ran the
-  PC out of memory once.
+All build work is done; what's left needs the owner (below).
+- The signed v1.0 release is ready for the first Play upload: `C:\DevProjects\ehligible-release.0.0\`
+  (`.aab` + `.apk`, built by CI from commit 4612559, signed locally with `tools/release/sign.sh`). The release
+  APK was tested on the emulator on 2026-10-30: onboarding, permissions, data after a restart, the widget,
+  WorkManager jobs; no crashes. Rebuild it if the app changes before the upload.
+- Local R8 release builds run this PC out of memory (killed twice): use the CI artifact and `sign.sh` instead.
 - Don't push while a CI run should finish: workflows cancel in-progress runs on the same branch.
 - Dependabot moves Material 3 only together with Compose Multiplatform (ignore rule in `dependabot.yml`).
 

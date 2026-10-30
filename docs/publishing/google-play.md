@@ -13,7 +13,8 @@ release: the first review, then the 14-day closed test, then the production revi
 3. **Back up the upload key.** `C:\Users\mirha\.ehligible\` holds `upload-keystore.jks` and
    `keystore.properties` (its password). Copy both to a password manager or another safe place. If they're lost,
    Google can reset the upload key (Play App Signing), but it takes days.
-4. **Signing secrets for automated releases** (GitHub → Settings → Secrets and variables → Actions):
+4. **Signing secrets for automated releases** (optional; only for tag-triggered releases. GitHub → the
+   `ehligible/ehligible` repo → Settings → Secrets and variables → Actions):
 
    | Secret | Value |
    |---|---|
@@ -96,9 +97,11 @@ the listing and release-note texts, and the two `gradle.properties` lines to cha
 3. **Countries:** Canada (add others if testers live elsewhere).
 4. **Create release:**
    - Accept **Play App Signing** (Google keeps the app-signing key; you keep the upload key).
-   - Upload the bundle. The **first upload must be manual**: take `androidApp-release.aab` from the
-     `ehligible-release` artifact of the *Android release* workflow (push the tag `v1.0.0`), or build it locally with
-     `./gradlew :androidApp:bundleRelease` (output: `androidApp/build/outputs/bundle/release/`).
+   - Upload the bundle. The **first upload must be manual**: `C:\DevProjects\ehligible-release.0.0\ehligible-1.0.0.aab`
+     is signed and tested (see the `README.txt` next to it). To make a new one: the *Android* workflow keeps the
+     unsigned bundle as the `ehligible-v1.0-unsigned` artifact; download it and sign it on this PC with
+     `tools/release/sign.sh` (a local `./gradlew :androidApp:bundleRelease` runs out of memory on this PC). Once the
+     signing secrets below are set, pushing a tag like `v1.0.1` builds and signs it in CI instead.
    - Release notes: `distribution/whatsnew/whatsnew-en-US` and `whatsnew-fr-CA`.
 5. **Review and roll out.** After Google's review, copy the **opt-in link** from the track's *Testers* tab and send
    it to your testers. Each tester opens it, accepts, installs, and **stays opted in for 14 days in a row**.
