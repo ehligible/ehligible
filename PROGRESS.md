@@ -29,6 +29,11 @@ SwiftUI app shell, WidgetKit widget + tests) can only be compiled by the `iOS` w
 GitHub repo. **First CI run will likely need fixes**: check the `iOS` workflow when the repo exists, then fix
 until green (screenshots are uploaded as artifacts).
 
+Still to re-verify locally: the signed release builds since the M8/M9 changes (R8). Run
+`./gradlew :androidApp:assembleRelease`, then again with `-Pehligible.backgroundLocation=true
+-Pehligible.versionName=1.1.0`, and smoke-test the v1.0 APK on the emulator. The 2026-10-30 04:15 attempt was
+stopped for low memory: build with the emulator closed, then start it for the smoke test.
+
 ## Usage limits (owner asked to resume right after a reset)
 - Built-in `autoContinueAtUsageLimit` is on (~/.claude/settings.json); it resumes after a reset if this window
   stays open and the laptop stays awake.
