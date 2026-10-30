@@ -1,0 +1,25 @@
+Eh-ligible counts down the days until you can apply for Canadian citizenship, right on your home screen.
+
+🍁 HOW IT WORKS
+• Enter the date you became a permanent resident and the trips you've taken since.
+• Eh-ligible applies the physical presence rule: 1,095 days in Canada during the 5 years before you apply.
+• Like IRCC, it counts the day you leave and the day you come back as days in Canada, and it adds the half-day credit for time you spent in Canada as a student, worker, visitor or protected person before becoming a permanent resident (up to 365 days).
+
+✈️ TRIPS, NOTICED AUTOMATICALLY
+When you open the app or tap the widget, Eh-ligible checks which country you're in using your approximate location and your mobile network. The check happens on your phone: your location is never stored or sent anywhere. If it can't tell where you were on a day, it asks you instead of guessing.
+
+📱 A WIDGET THAT KEEPS YOU GOING
+A maple leaf fills up as you get closer, with the number of days left and the date you can apply.
+
+✨ AND MORE
+• Plan a trip and see how it would move your date before you book.
+• A trip journal you can export with the columns the citizenship application asks for.
+• A "Ready to apply?" checklist: taxes, language, test and fees.
+• A safety margin, because IRCC encourages applying with more than 1,095 days.
+• Milestones, confetti and a Canadian fun fact every day.
+• English and French. Free, with no ads, no account and no tracking.
+
+🔒 PRIVACY
+Everything stays on your device. No account, no servers, no analytics.
+
+ℹ️ Eh-ligible is an independent app. It is not affiliated with Immigration, Refugees and Citizenship Canada (IRCC) or the Government of Canada. It gives an estimate based on the public rules published on canada.ca. Always confirm with IRCC's official tools before you apply.
