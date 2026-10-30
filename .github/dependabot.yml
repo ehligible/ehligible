@@ -7,6 +7,11 @@ updates:
     groups:
       kotlin-and-compose:
         patterns: ["org.jetbrains*", "androidx.*", "com.android*"]
+    ignore:
+      # Material 3 is paired with a Compose Multiplatform release (see gradle/libs.versions.toml);
+      # it moves together with Compose, never on its own to the next release's pre-releases.
+      - dependency-name: "org.jetbrains.compose.material3:material3"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
 
   - package-ecosystem: github-actions
     directory: /
