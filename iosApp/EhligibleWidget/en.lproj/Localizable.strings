@@ -1,0 +1,14 @@
+/* The widget's wording; matches the app's (composeApp/src/commonMain/composeResources/values/strings.xml). */
+"widget.name" = "Citizenship countdown";
+"widget.description" = "Days left until you can apply for Canadian citizenship";
+"setup" = "Open Eh-ligible to start your countdown";
+"stale" = "Open Eh-ligible to update your countdown";
+"eligible" = "You can apply!";
+"apply_from" = "Apply from %@";
+"safer_date" = "Safer date: %@";
+"counted" = "%1$@ of %2$@ days counted";
+"status.in_canada" = "In Canada";
+"status.abroad" = "Abroad: %@";
+"status.abroad_unknown" = "Abroad";
+"status.near_border" = "Near the border";
+"status.unknown" = "Not checked recently";
