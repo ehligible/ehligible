@@ -19,19 +19,19 @@ fun interface WidgetRefresher {
 
 /** Posts the opt-in notifications. Implementations must respect the user's setting and OS permission. */
 interface Notifier {
-    fun milestone(milestone: Milestone, dashboard: Dashboard)
+    suspend fun milestone(milestone: Milestone, dashboard: Dashboard)
 
-    fun travelling(country: String?)
+    suspend fun travelling(country: String?)
 
-    fun reviewNeeded(days: Int)
+    suspend fun reviewNeeded(days: Int)
 
     companion object {
         val NONE: Notifier = object : Notifier {
-            override fun milestone(milestone: Milestone, dashboard: Dashboard) = Unit
+            override suspend fun milestone(milestone: Milestone, dashboard: Dashboard) = Unit
 
-            override fun travelling(country: String?) = Unit
+            override suspend fun travelling(country: String?) = Unit
 
-            override fun reviewNeeded(days: Int) = Unit
+            override suspend fun reviewNeeded(days: Int) = Unit
         }
     }
 }

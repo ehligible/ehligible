@@ -1,4 +1,265 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Eh-ligible</string>
+
+    <!-- Commun -->
+    <string name="action_continue">Continuer</string>
+    <string name="action_back">Retour</string>
+    <string name="action_save">Enregistrer</string>
+    <string name="action_cancel">Annuler</string>
+    <string name="action_delete">Supprimer</string>
+    <string name="action_done">Terminé</string>
+    <string name="action_ok">OK</string>
+    <string name="action_edit">Modifier</string>
+    <string name="action_not_now">Pas maintenant</string>
+    <string name="action_pick_date">Choisir une date</string>
+    <string name="range_from">Du</string>
+    <string name="range_to">Au</string>
+    <string name="widget_setup">Ouvrez Eh-ligible pour lancer votre compte à rebours</string>
+    <string name="disclaimer_short">Aucun lien avec IRCC ni le gouvernement du Canada. Estimations seulement : vérifiez toujours avec les outils officiels d’IRCC avant de présenter votre demande.</string>
+    <string name="leaf_description">Feuille d’érable remplie à %1$s pour cent</string>
+
+    <!-- Accueil (première utilisation) -->
+    <string name="onb_welcome_title">Votre compte à rebours vers la citoyenneté canadienne</string>
+    <string name="onb_welcome_body">Eh-ligible compte les jours jusqu’à ce que vous puissiez présenter votre demande, selon la règle officielle : 1 095 jours au Canada dans les 5 ans précédant la demande. L’application remarque vos voyages toute seule, directement sur votre téléphone.</string>
+    <string name="onb_welcome_start">C’est parti</string>
+    <string name="onb_pr_title">Quand êtes-vous devenu résident permanent?</string>
+    <string name="onb_pr_body">La date inscrite sur votre confirmation de résidence permanente (CRP) : le jour où vous êtes arrivé ou avez été approuvé au Canada.</string>
+    <string name="onb_status_title">Avant cela, étiez-vous au Canada avec un statut?</string>
+    <string name="onb_status_body">Chaque jour comme visiteur, étudiant, travailleur ou personne protégée pendant la période de 5 ans compte pour une demi-journée, jusqu’à 365 jours.</string>
+    <string name="onb_status_yes">Oui</string>
+    <string name="onb_status_no">Non, je suis arrivé comme RP</string>
+    <string name="onb_status_since">Mon premier statut a commencé le</string>
+    <string name="onb_status_since_hint">Pour les personnes protégées, indiquez la date où la demande d’asile a été acceptée.</string>
+    <string name="onb_status_gaps_title">Des périodes sans statut?</string>
+    <string name="onb_status_gaps_body">Ajoutez les périodes sans statut, ou passées à attendre une décision sur une demande d’asile. Elles ne comptent pas. Le statut maintenu (en attente d’une prolongation) compte. En cas de doute sur une période, IRCC recommande de l’exclure.</string>
+    <string name="onb_status_add_gap">Ajouter une période sans statut</string>
+    <string name="onb_trips_title">Voyages hors du Canada</string>
+    <string name="onb_trips_body">Indiquez vos voyages depuis le %1$s, y compris les allers-retours d’une journée. À partir d’aujourd’hui, Eh-ligible remarque vos nouveaux voyages tout seul.</string>
+    <string name="onb_trips_none">Je n’ai pas quitté le Canada</string>
+    <string name="onb_location_title">Laissez Eh-ligible remarquer vos voyages</string>
+    <string name="onb_location_body">Eh-ligible utilise votre position approximative pour savoir dans quel pays vous êtes quand vous ouvrez l’application ou touchez le widget, afin de compter vos voyages automatiquement. La vérification se fait sur votre téléphone : votre position n’est jamais conservée ni envoyée.</string>
+    <string name="onb_location_allow">Utiliser la position approximative</string>
+    <string name="onb_location_decline">Non merci</string>
+    <string name="onb_location_on">La vérification de la position est activée. Merci!</string>
+    <string name="onb_notifications_title">De petites célébrations?</string>
+    <string name="onb_notifications_body">Recevez un petit mot aux étapes importantes, le jour où vous pouvez présenter votre demande et quand un voyage est à vérifier. Quelques fois par mois au plus.</string>
+    <string name="onb_notifications_allow">Oui, avisez-moi</string>
+    <string name="onb_done_title">Tout est prêt!</string>
+    <string name="onb_done_widget">Astuce : ajoutez le widget Eh-ligible à votre écran d’accueil pour voir votre compte à rebours chaque jour.</string>
+    <string name="action_add_widget">Ajouter le widget à l’écran d’accueil</string>
+    <string name="onb_done_button">Voir mon compte à rebours</string>
+    <string name="onb_step">Étape %1$d sur %2$d</string>
+
+    <!-- Accueil -->
+    <plurals name="home_days_to_go">
+        <item quantity="one">jour à faire</item>
+        <item quantity="other">jours à faire</item>
+    </plurals>
+    <string name="home_apply_from">Demande possible dès le %1$s</string>
+    <string name="home_safer_date">Date plus sûre : %1$s</string>
+    <string name="home_exact_date">Premier jour possible : %1$s</string>
+    <string name="home_counted">%1$s jours comptés sur %2$s</string>
+    <string name="home_eligible_title">Vous pouvez présenter votre demande!</string>
+    <string name="home_eligible_body">Vous avez assez de jours pour demander la citoyenneté. IRCC encourage à présenter la demande avec quelques jours de plus, par précaution.</string>
+    <string name="home_apply_link">Faire la demande sur le site d’IRCC</string>
+    <string name="home_not_reachable">Aucune date dans les 15 prochaines années. Vérifiez vos voyages.</string>
+    <string name="home_trips">Voyages</string>
+    <string name="home_checklist">Prêt pour la demande?</string>
+    <string name="home_settings">Paramètres</string>
+    <string name="home_fun_fact">Le saviez-vous?</string>
+    <plurals name="home_review_banner">
+        <item quantity="one">%1$d jour à vérifier</item>
+        <item quantity="other">%1$d jours à vérifier</item>
+    </plurals>
+    <string name="home_review_action">Vérifier</string>
+    <string name="status_in_canada">Au Canada</string>
+    <string name="status_abroad">À l’étranger : %1$s</string>
+    <string name="status_abroad_unknown">À l’étranger</string>
+    <string name="status_near_border">Près de la frontière</string>
+    <string name="status_unknown">Pas vérifié récemment</string>
+    <string name="status_paused">Compte à rebours en pause. Bon voyage!</string>
+
+    <!-- Voyages -->
+    <string name="journal_title">Voyages</string>
+    <string name="journal_empty">Aucun voyage pour l’instant. Ajoutez vos voyages passés ou prévus avec le bouton ci-dessous.</string>
+    <string name="journal_planned">Prévus</string>
+    <string name="journal_current">En cours</string>
+    <string name="journal_past">Voyages passés</string>
+    <string name="journal_add">Ajouter un voyage</string>
+    <string name="journal_export">Exporter</string>
+    <string name="journal_export_share">Partager en texte</string>
+    <string name="journal_export_csv">Enregistrer en tableur (CSV)</string>
+    <string name="journal_export_saved">Liste des voyages enregistrée</string>
+    <string name="journal_rule">Le jour du départ et le jour du retour comptent tous deux comme des jours au Canada. Seules les journées complètes à l’étranger sont soustraites.</string>
+    <plurals name="trip_days_away">
+        <item quantity="one">%1$d journée complète à l’étranger</item>
+        <item quantity="other">%1$d journées complètes à l’étranger</item>
+    </plurals>
+    <string name="trip_same_day">Aller-retour dans la journée : compte comme un jour au Canada</string>
+    <string name="trip_detected">Détecté</string>
+    <string name="trip_planned">Prévu</string>
+    <string name="trip_needs_review">À vérifier</string>
+    <string name="trip_ongoing">Toujours à l’étranger</string>
+    <string name="trip_editor_new">Nouveau voyage</string>
+    <string name="trip_editor_edit">Modifier le voyage</string>
+    <string name="trip_left">Départ du Canada</string>
+    <string name="trip_returned">Retour au Canada</string>
+    <string name="trip_destination">Destination</string>
+    <string name="trip_reason">Motif</string>
+    <string name="trip_reason_hint">p. ex. vacances, famille, travail</string>
+    <string name="trip_planned_note">Ce voyage est dans le futur. Il montre comment vos dates changeraient.</string>
+    <string name="trip_delete_confirm">Supprimer ce voyage?</string>
+    <string name="trip_return_before_departure">La date de retour ne peut pas précéder la date de départ.</string>
+    <string name="export_subject">Mes voyages hors du Canada</string>
+    <string name="export_col_left">Date de départ du Canada</string>
+    <string name="export_col_returned">Date de retour</string>
+    <string name="export_col_destination">Destination</string>
+    <string name="export_col_reason">Motif</string>
+    <string name="export_col_days">Journées complètes d’absence</string>
+    <string name="export_ongoing">Toujours à l’étranger</string>
+
+    <!-- Vérification -->
+    <string name="review_title">Jours à vérifier</string>
+    <string name="review_body">Eh-ligible n’a pas pu savoir où vous étiez ces jours-là. Tant que vous ne répondez pas, ils comptent comme des jours hors du Canada.</string>
+    <string name="review_in_canada">Au Canada</string>
+    <string name="review_away">À l’étranger</string>
+    <string name="review_all_away">Tout marquer à l’étranger</string>
+    <string name="review_done">Tout est à jour!</string>
+
+    <!-- Liste de vérification -->
+    <string name="checklist_title">Prêt pour la demande?</string>
+    <string name="checklist_presence">1 095 jours au Canada</string>
+    <string name="checklist_presence_done">C’est fait : vous avez assez de jours.</string>
+    <string name="checklist_presence_todo">Pas encore : %1$s.</string>
+    <string name="checklist_pr">Statut de résident permanent valide</string>
+    <string name="checklist_pr_body">Aucune mesure de renvoi ni condition non remplie. Une carte de RP expirée est acceptée.</string>
+    <string name="checklist_taxes">Déclarations de revenus produites</string>
+    <string name="checklist_taxes_body">Pour au moins 3 de ces années, si vous deviez en produire : %1$s.</string>
+    <string name="checklist_language">Preuve de langue (NCLC/CLB 4)</string>
+    <string name="checklist_language_body">Expression et compréhension orales en français ou en anglais, si vous avez de 18 à 54 ans le jour où vous signez.</string>
+    <string name="checklist_test">Examen pour la citoyenneté</string>
+    <string name="checklist_test_body">Aussi pour les 18 à 54 ans : 20 questions, note de passage 15.</string>
+    <string name="checklist_age_not_needed">Pas nécessaire à votre âge.</string>
+    <string name="checklist_age_maybe">Dépend de votre date d’anniversaire exacte.</string>
+    <string name="checklist_birth_year">Année de naissance (facultatif)</string>
+    <string name="checklist_fee">Frais de demande</string>
+    <string name="checklist_fee_body">653 $ pour les adultes (2026). IRCC met ses frais à jour chaque 31 mars.</string>
+    <string name="checklist_prohibitions">Rien qui vous en empêche</string>
+    <string name="checklist_prohibitions_body">Par exemple : aucune accusation en cours, peine ou condamnation récente pour une infraction grave, et aucune fausse déclaration récente.</string>
+    <string name="checklist_links">Information officielle</string>
+    <string name="checklist_link_who">Qui peut présenter une demande (IRCC)</string>
+    <string name="checklist_link_calculator">Calculateur de présence physique d’IRCC</string>
+    <string name="checklist_all_done">Tout est coché!</string>
+
+    <!-- Paramètres -->
+    <string name="settings_title">Paramètres</string>
+    <string name="settings_countdown">Compte à rebours</string>
+    <string name="settings_margin">Marge de sécurité</string>
+    <string name="settings_margin_body">Jours ajoutés pour obtenir votre date plus sûre. IRCC encourage à présenter la demande avec plus de 1 095 jours.</string>
+    <plurals name="settings_margin_value">
+        <item quantity="one">%1$d jour</item>
+        <item quantity="other">%1$d jours</item>
+    </plurals>
+    <string name="settings_target">Compte à rebours jusqu’à</string>
+    <string name="settings_target_exact">Premier jour possible</string>
+    <string name="settings_target_safer">Date plus sûre</string>
+    <string name="settings_notifications">Notifications</string>
+    <string name="settings_notifications_body">Étapes, jour d’admissibilité et voyages à vérifier</string>
+    <string name="settings_location">Vérification de la position</string>
+    <string name="settings_location_on">La position approximative est activée</string>
+    <string name="settings_location_off">Désactivée : seul le réseau mobile est utilisé</string>
+    <string name="settings_location_turn_on">Activer</string>
+    <string name="settings_profile">Vos renseignements</string>
+    <string name="settings_pr_date">Date de RP</string>
+    <string name="settings_status_date">Statut avant la RP depuis le</string>
+    <string name="settings_status_none">Aucun</string>
+    <string name="settings_backup">Sauvegarde</string>
+    <string name="settings_backup_export">Enregistrer une sauvegarde</string>
+    <string name="settings_backup_import">Restaurer une sauvegarde</string>
+    <string name="settings_backup_import_confirm">Remplacer toutes les données de l’application par cette sauvegarde?</string>
+    <string name="settings_backup_saved">Sauvegarde enregistrée</string>
+    <string name="settings_backup_restored">Sauvegarde restaurée</string>
+    <string name="settings_backup_invalid">Ce fichier n’est pas une sauvegarde Eh-ligible.</string>
+    <string name="settings_about">À propos</string>
+    <string name="settings_privacy">Politique de confidentialité</string>
+    <string name="settings_source">Code source</string>
+    <string name="settings_version">Version %1$s</string>
+    <string name="settings_credits">Données des frontières : réalisé avec Natural Earth (domaine public).</string>
+    <string name="settings_rare_cases">Moins de 18 ans, fonctionnaire de l’État ou membre des Forces armées canadiennes à l’étranger, ou une probation, une libération conditionnelle ou une peine dans les 5 dernières années? Eh-ligible ne couvre pas ces cas. Utilisez le calculateur d’IRCC.</string>
+
+    <!-- Étapes -->
+    <string name="milestone_QUARTER">Le quart du chemin!</string>
+    <string name="milestone_HALFWAY">À mi-chemin!</string>
+    <string name="milestone_THREE_QUARTERS">Les trois quarts de faits!</string>
+    <string name="milestone_DAYS_LEFT_100">Plus que 100 jours!</string>
+    <string name="milestone_DAYS_LEFT_30">Plus qu’un mois!</string>
+    <string name="milestone_DAYS_LEFT_7">Plus qu’une semaine!</string>
+    <string name="milestone_DAYS_LEFT_1">C’est demain le grand jour!</string>
+    <string name="milestone_ELIGIBLE">Vous pouvez demander la citoyenneté dès aujourd’hui!</string>
+
+    <!-- Notifications -->
+    <string name="notif_channel_milestones">Étapes</string>
+    <string name="notif_channel_trips">Voyages</string>
+    <string name="notif_travelling_title">On dirait que vous voyagez ✈️</string>
+    <string name="notif_travelling_body">Votre compte à rebours est en pause pendant votre absence. Bon voyage!</string>
+    <string name="notif_review_title">Quelques jours à vérifier</string>
+    <string name="notif_review_body">Touchez pour indiquer à Eh-ligible où vous étiez.</string>
+    <plurals name="notif_days_to_go">
+        <item quantity="one">Plus que %1$d jour.</item>
+        <item quantity="other">Plus que %1$d jours.</item>
+    </plurals>
+    <string name="notif_eligible_body">Ouvrez Eh-ligible pour voir votre liste de vérification.</string>
+
+    <!-- Pour le plaisir : {n} est remplacé par le nombre de jours -->
+    <string-array name="one_liners">
+        <item>Plus que {n} dodos avant de pouvoir faire votre demande!</item>
+        <item>{n} jours à faire. Gardez votre calme et mangez une poutine.</item>
+        <item>Encore {n} jours à être presque Canadien.</item>
+        <item>{n} jours. Le bon moment pour pratiquer vos « désolé ».</item>
+        <item>{n} jours à faire. Les castors croient en vous.</item>
+        <item>{n} jours à faire. Réserves de sirop d’érable : stables.</item>
+        <item>Plus que {n} jours. Lâchez pas!</item>
+        <item>Compte à rebours : {n} jours. Ça s’en vient!</item>
+        <item>{n} jours avant l’heure de la citoyenneté.</item>
+        <item>{n} jours à faire. Tuque sur la tête, menton haut.</item>
+    </string-array>
+    <string name="one_liner_soon">{n} jours! Il est temps de sortir vos documents.</string>
+    <string name="one_liner_abroad">Compte à rebours en pause. Bon voyage! Il reprendra à votre retour.</string>
+    <string name="one_liner_eligible">Vous avez réussi. À vous la citoyenneté!</string>
+
+    <string-array name="fun_facts">
+        <item>Le Canada a le plus long littoral au monde : environ 243 000 km.</item>
+        <item>Le Canada est le deuxième plus grand pays du monde par sa superficie.</item>
+        <item>La frontière entre le Canada et les États-Unis est la plus longue frontière internationale au monde, avec environ 8 890 km.</item>
+        <item>Le drapeau à la feuille d’érable a été hissé pour la première fois le 15 février 1965.</item>
+        <item>« Ô Canada » est devenu l’hymne national officiel en 1980.</item>
+        <item>Le Canada compte 10 provinces et 3 territoires. Le plus récent, le Nunavut, a été créé en 1999.</item>
+        <item>Le Canada détient environ 20 % de l’eau douce de la planète.</item>
+        <item>Le castor est un symbole officiel du Canada depuis 1975.</item>
+        <item>La devise du Canada, « A mari usque ad mare », signifie « D’un océan à l’autre ».</item>
+        <item>Le Canada est bordé par trois océans : l’Atlantique, le Pacifique et l’Arctique.</item>
+        <item>Le basketball a été inventé en 1891 par un Canadien, James Naismith.</item>
+        <item>L’insuline a été découverte à Toronto en 1921 par Frederick Banting et Charles Best.</item>
+        <item>Le plus haut sommet du Canada est le mont Logan, au Yukon, à 5 959 m.</item>
+        <item>La crosse est le sport national d’été du Canada, et le hockey son sport national d’hiver.</item>
+        <item>Le parc national Wood Buffalo est plus grand que la Suisse.</item>
+        <item>Le Canada compte plus de lacs que tout autre pays.</item>
+        <item>Churchill, au Manitoba, est surnommée la capitale mondiale de l’ours polaire.</item>
+        <item>La baie de Fundy a les plus hautes marées du monde, jusqu’à environ 16 m.</item>
+        <item>La tour CN de Toronto a été la plus haute structure autoportante du monde pendant plus de 30 ans.</item>
+        <item>La fête du Canada, le 1er juillet, souligne la Confédération de 1867.</item>
+        <item>La poutine, des frites avec du fromage en grains et de la sauce, vient du Québec rural.</item>
+        <item>Le Québec produit environ 70 % du sirop d’érable du monde.</item>
+        <item>En hiver, le canal Rideau à Ottawa devient une patinoire de 7,8 km.</item>
+        <item>La population du Canada a dépassé 40 millions en 2023.</item>
+        <item>Le Canada compte six fuseaux horaires, dont celui de Terre-Neuve, décalé d’une demi-heure.</item>
+        <item>La pièce de 1 $, le huard, est apparue en 1987. Le 2 $ a suivi en 1996.</item>
+        <item>La reine Victoria a choisi Ottawa comme capitale du Canada en 1857.</item>
+        <item>Banff, créé en 1885, est le premier parc national du Canada.</item>
+        <item>La goélette Bluenose figure sur la pièce de 10 cents.</item>
+        <item>La température la plus froide jamais enregistrée au Canada est de −63 °C, à Snag, au Yukon, en 1947.</item>
+        <item>La plus grande partie des chutes du Fer-à-Cheval, à Niagara, se trouve du côté canadien.</item>
+        <item>Le français et l’anglais sont les deux langues officielles du Canada.</item>
+    </string-array>
 </resources>
