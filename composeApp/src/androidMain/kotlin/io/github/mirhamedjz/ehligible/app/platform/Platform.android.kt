@@ -6,13 +6,18 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
+import android.provider.Settings
+import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.edit
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import java.text.NumberFormat
 import java.time.format.DateTimeFormatter
@@ -42,16 +47,44 @@ actual fun countryName(code: String): String = try {
 private fun Context.has(permission: String): Boolean =
     ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
 
+private fun Context.askedBefore(permission: String): Boolean =
+    getSharedPreferences(PERMISSION_PREFS, Context.MODE_PRIVATE).getBoolean(permission, false)
+
+private fun Context.rememberAsked(permission: String) {
+    getSharedPreferences(PERMISSION_PREFS, Context.MODE_PRIVATE).edit { putBoolean(permission, true) }
+}
+
+private fun Context.openAppSettings() {
+    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", packageName, null))
+    startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+}
+
+private const val PERMISSION_PREFS = "permission_requests"
+
 @Composable
 private fun rememberPermission(permission: String?, onResult: (Boolean) -> Unit): PermissionController {
     val context = LocalContext.current
+    val activity = LocalActivity.current
     fun current() = permission == null || context.has(permission)
     val controller = remember { StatePermissionController(current()) }
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { ok ->
         controller.state = ok || current()
         onResult(ok)
     }
-    controller.onRequest = { if (permission == null) onResult(true) else launcher.launch(permission) }
+    controller.onRequest = request@{
+        if (permission == null) return@request onResult(true)
+        // After repeated denials Android stops showing its prompt, so the button would do nothing.
+        // The app's system settings page is the only way left to grant it.
+        val blocked = context.askedBefore(permission) &&
+            activity != null &&
+            !ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)
+        if (blocked) {
+            context.openAppSettings()
+        } else {
+            context.rememberAsked(permission)
+            launcher.launch(permission)
+        }
+    }
     LifecycleResumeEffect(controller) {
         controller.state = current()
         onPauseOrDispose { }
