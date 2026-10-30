@@ -43,18 +43,11 @@ import io.github.mirhamedjz.ehligible.app.resources.action_cancel
 import io.github.mirhamedjz.ehligible.app.resources.action_ok
 import io.github.mirhamedjz.ehligible.app.resources.action_pick_date
 import io.github.mirhamedjz.ehligible.app.resources.fun_facts
-import io.github.mirhamedjz.ehligible.app.resources.milestone_DAYS_LEFT_1
-import io.github.mirhamedjz.ehligible.app.resources.milestone_DAYS_LEFT_100
-import io.github.mirhamedjz.ehligible.app.resources.milestone_DAYS_LEFT_30
-import io.github.mirhamedjz.ehligible.app.resources.milestone_DAYS_LEFT_7
-import io.github.mirhamedjz.ehligible.app.resources.milestone_ELIGIBLE
-import io.github.mirhamedjz.ehligible.app.resources.milestone_HALFWAY
-import io.github.mirhamedjz.ehligible.app.resources.milestone_QUARTER
-import io.github.mirhamedjz.ehligible.app.resources.milestone_THREE_QUARTERS
 import io.github.mirhamedjz.ehligible.app.resources.one_liner_abroad
 import io.github.mirhamedjz.ehligible.app.resources.one_liner_eligible
 import io.github.mirhamedjz.ehligible.app.resources.one_liner_soon
 import io.github.mirhamedjz.ehligible.app.resources.one_liners
+import io.github.mirhamedjz.ehligible.app.title
 import io.github.mirhamedjz.ehligible.core.model.CurrentStatus
 import io.github.mirhamedjz.ehligible.core.model.Dashboard
 import io.github.mirhamedjz.ehligible.core.model.Milestone
@@ -67,18 +60,7 @@ import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun milestoneText(milestone: Milestone): String = stringResource(
-    when (milestone) {
-        Milestone.QUARTER -> Res.string.milestone_QUARTER
-        Milestone.HALFWAY -> Res.string.milestone_HALFWAY
-        Milestone.THREE_QUARTERS -> Res.string.milestone_THREE_QUARTERS
-        Milestone.DAYS_LEFT_100 -> Res.string.milestone_DAYS_LEFT_100
-        Milestone.DAYS_LEFT_30 -> Res.string.milestone_DAYS_LEFT_30
-        Milestone.DAYS_LEFT_7 -> Res.string.milestone_DAYS_LEFT_7
-        Milestone.DAYS_LEFT_1 -> Res.string.milestone_DAYS_LEFT_1
-        Milestone.ELIGIBLE -> Res.string.milestone_ELIGIBLE
-    },
-)
+fun milestoneText(milestone: Milestone): String = stringResource(milestone.title)
 
 /** Today's playful line: changes daily, reacts to trips and to the final stretch. */
 @Composable

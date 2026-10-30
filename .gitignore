@@ -34,6 +34,8 @@ iosApp/*.xcworkspace/
 xcuserdata/
 DerivedData/
 iosApp/build/
+iosApp/*/Info.plist
+iosApp/*/*.entitlements
 
 # Tool caches
 tools/**/.cache/

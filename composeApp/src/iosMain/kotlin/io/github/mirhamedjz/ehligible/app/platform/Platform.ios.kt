@@ -4,16 +4,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.setValue
+import io.github.mirhamedjz.ehligible.app.resources.Res
+import io.github.mirhamedjz.ehligible.app.resources.onb_background_hint_ios
 import kotlinx.cinterop.BetaInteropApi
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.toNSDateComponents
+import org.jetbrains.compose.resources.StringResource
 import platform.CoreLocation.CLLocationManager
 import platform.CoreLocation.CLLocationManagerDelegateProtocol
 import platform.CoreLocation.kCLAuthorizationStatusAuthorizedAlways
 import platform.CoreLocation.kCLAuthorizationStatusAuthorizedWhenInUse
+import platform.CoreLocation.kCLAuthorizationStatusDenied
 import platform.CoreLocation.kCLAuthorizationStatusNotDetermined
 import platform.Foundation.NSCalendar
 import platform.Foundation.NSDateFormatter
@@ -29,6 +35,7 @@ import platform.Foundation.NSString
 import platform.Foundation.NSTemporaryDirectory
 import platform.Foundation.NSURL
 import platform.Foundation.NSUTF8StringEncoding
+import platform.Foundation.NSUserDefaults
 import platform.Foundation.create
 import platform.Foundation.currentLocale
 import platform.Foundation.localizedStringForCountryCode
@@ -36,6 +43,7 @@ import platform.Foundation.stringWithContentsOfURL
 import platform.Foundation.writeToURL
 import platform.UIKit.UIActivityViewController
 import platform.UIKit.UIApplication
+import platform.UIKit.UIApplicationOpenSettingsURLString
 import platform.UIKit.UIDocumentPickerDelegateProtocol
 import platform.UIKit.UIDocumentPickerViewController
 import platform.UIKit.UIViewController
@@ -46,6 +54,7 @@ import platform.UserNotifications.UNAuthorizationOptionAlert
 import platform.UserNotifications.UNAuthorizationOptionBadge
 import platform.UserNotifications.UNAuthorizationOptionSound
 import platform.UserNotifications.UNAuthorizationStatusAuthorized
+import platform.UserNotifications.UNAuthorizationStatusDenied
 import platform.UserNotifications.UNUserNotificationCenter
 import platform.darwin.NSObject
 import platform.darwin.dispatch_async
@@ -110,11 +119,23 @@ private fun rememberLocationAuthorization(always: Boolean, onResult: (Boolean) -
     DisposableEffect(authorization) {
         var asked = false
         controller.onRequest = {
-            asked = true
-            if (always) {
-                authorization.manager.requestAlwaysAuthorization()
-            } else {
-                authorization.manager.requestWhenInUseAuthorization()
+            val defaults = NSUserDefaults.standardUserDefaults
+            when {
+                // iOS asks once; after a refusal (or "Keep Only While Using"), only Settings can change it.
+                authorization.manager.authorizationStatus == kCLAuthorizationStatusDenied -> openAppSettings()
+
+                always && defaults.boolForKey(ASKED_ALWAYS_KEY) -> openAppSettings()
+
+                always -> {
+                    asked = true
+                    defaults.setBool(true, forKey = ASKED_ALWAYS_KEY)
+                    authorization.manager.requestAlwaysAuthorization()
+                }
+
+                else -> {
+                    asked = true
+                    authorization.manager.requestWhenInUseAuthorization()
+                }
             }
         }
         authorization.onChange = {
@@ -129,18 +150,33 @@ private fun rememberLocationAuthorization(always: Boolean, onResult: (Boolean) -
     return controller
 }
 
+actual val backgroundPermissionHint: StringResource = Res.string.onb_background_hint_ios
+
+private const val ASKED_ALWAYS_KEY = "askedForAlwaysLocation"
+
+private fun openAppSettings() {
+    val url = NSURL.URLWithString(UIApplicationOpenSettingsURLString) ?: return
+    UIApplication.sharedApplication.openURL(url, options = emptyMap<Any?, Any>(), completionHandler = null)
+}
+
 @Composable
 actual fun rememberNotificationPermission(onResult: (Boolean) -> Unit): PermissionController {
     val center = remember { UNUserNotificationCenter.currentNotificationCenter() }
     val controller = remember { StatePermissionController(false) }
+    var denied by remember { mutableStateOf(false) }
     val latestOnResult by rememberUpdatedState(onResult)
     LaunchedEffect(center) {
         center.getNotificationSettingsWithCompletionHandler { settings ->
-            val granted = settings?.authorizationStatus == UNAuthorizationStatusAuthorized
-            dispatch_async(dispatch_get_main_queue()) { controller.state = granted }
+            val status = settings?.authorizationStatus
+            dispatch_async(dispatch_get_main_queue()) {
+                controller.state = status == UNAuthorizationStatusAuthorized
+                denied = status == UNAuthorizationStatusDenied
+            }
         }
     }
-    controller.onRequest = {
+    controller.onRequest = request@{
+        // iOS asks once; after a refusal only Settings can turn notifications on.
+        if (denied) return@request openAppSettings()
         val options = UNAuthorizationOptionAlert or UNAuthorizationOptionSound or UNAuthorizationOptionBadge
         center.requestAuthorizationWithOptions(options) { granted, _ ->
             dispatch_async(dispatch_get_main_queue()) {

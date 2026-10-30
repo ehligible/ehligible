@@ -50,6 +50,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
+import io.github.mirhamedjz.ehligible.app.platform.backgroundPermissionHint
 import io.github.mirhamedjz.ehligible.app.platform.formatDate
 import io.github.mirhamedjz.ehligible.app.platform.formatNumber
 import io.github.mirhamedjz.ehligible.app.platform.rememberBackgroundLocationPermission
@@ -413,7 +414,7 @@ private fun BackgroundStep(next: () -> Unit, back: () -> Unit) {
     val canAsk = foreground.granted && !permission.granted
     StepPage(
         title = stringResource(Res.string.onb_background_title),
-        body = stringResource(Res.string.onb_background_body),
+        body = stringResource(Res.string.onb_background_body) + " " + stringResource(backgroundPermissionHint),
         primary = stringResource(if (canAsk) Res.string.onb_background_allow else Res.string.action_continue),
         onPrimary = { if (canAsk) permission.request() else next() },
         secondary = if (canAsk) stringResource(Res.string.onb_location_decline) else null,

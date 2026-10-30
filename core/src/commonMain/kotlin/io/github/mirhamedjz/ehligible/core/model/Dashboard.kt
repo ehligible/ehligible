@@ -48,6 +48,10 @@ data class Dashboard(
         (projection.creditToDate.halfDays / (2f * CitizenshipRules.REQUIRED_DAYS)).coerceIn(0f, 1f)
 
     val isEligibleToday: Boolean get() = projection.isEligibleToday
+
+    /** Celebrate instead of counting down: eligible today and, when counting to the safer date, it has come. */
+    val showsCelebration: Boolean
+        get() = isEligibleToday && (target == CountdownTarget.EXACT || daysLeft == 0)
 }
 
 /** Builds the [Dashboard], or null before onboarding is done. */

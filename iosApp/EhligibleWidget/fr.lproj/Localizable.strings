@@ -1,0 +1,14 @@
+/* Le texte du widget; identique à celui de l'application (composeResources/values-fr/strings.xml). */
+"widget.name" = "Compte à rebours citoyenneté";
+"widget.description" = "Jours restants avant de pouvoir demander la citoyenneté canadienne";
+"setup" = "Ouvrez Eh-ligible pour lancer votre compte à rebours";
+"stale" = "Ouvrez Eh-ligible pour mettre à jour votre compte à rebours";
+"eligible" = "Vous pouvez présenter votre demande!";
+"apply_from" = "Demande possible dès le %@";
+"safer_date" = "Date plus sûre : %@";
+"counted" = "%1$@ jours comptés sur %2$@";
+"status.in_canada" = "Au Canada";
+"status.abroad" = "À l’étranger : %@";
+"status.abroad_unknown" = "À l’étranger";
+"status.near_border" = "Près de la frontière";
+"status.unknown" = "Pas vérifié récemment";

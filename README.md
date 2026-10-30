@@ -27,16 +27,26 @@ automatically.
 | `iosApp/` | iOS app (XcodeGen project), WidgetKit extension, CoreLocation |
 | `docs/` | [Spec](docs/SPEC.md), [glossary](docs/GLOSSARY.md), [research](docs/research/), publishing guide |
 | `site/` | GitHub Pages: privacy policy and support page |
-| `tools/` | Build-time scripts (border data generation) |
+| `tools/` | Build-time scripts (border data, store graphics, screenshot data) |
 
 ## Building
 
-Requirements: JDK 17+, Android SDK (platform 36). iOS builds run on macOS in CI.
+Requirements: JDK 17+, Android SDK (platform 36).
 
 ```sh
-./gradlew check                    # unit tests, lint, formatting
+./gradlew check                    # unit tests, lint, formatting (also compiles the iOS Kotlin code)
 ./gradlew :androidApp:installDebug # install the debug build on a device/emulator
 ```
+
+The iOS app needs macOS with Xcode and [XcodeGen](https://github.com/yonaskolb/XcodeGen):
+
+```sh
+xcodegen generate --spec iosApp/project.yml   # writes iosApp/Ehligible.xcodeproj
+open iosApp/Ehligible.xcodeproj               # the build runs Gradle for the Kotlin framework
+```
+
+Without a Mac, the `iOS` GitHub Actions workflow builds it, runs the Kotlin and widget tests on a simulator,
+launches the app and uploads screenshots.
 
 ## License
 

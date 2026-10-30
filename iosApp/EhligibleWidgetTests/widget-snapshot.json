@@ -1,0 +1,37 @@
+{
+  "generatedAt": 1793289600000,
+  "reviewDays": 2,
+  "target": "SAFER",
+  "days": [
+    {
+      "date": "2026-10-29",
+      "daysLeft": 436,
+      "countdownDate": "2028-01-08",
+      "creditedDays": 667,
+      "progress": 0.6091,
+      "celebrate": false,
+      "status": "ABROAD",
+      "country": "FR"
+    },
+    {
+      "date": "2026-10-30",
+      "daysLeft": 435,
+      "countdownDate": "2028-01-08",
+      "creditedDays": 668,
+      "progress": 0.61,
+      "celebrate": false,
+      "status": "IN_CANADA",
+      "country": null
+    },
+    {
+      "date": "2026-10-31",
+      "daysLeft": null,
+      "countdownDate": null,
+      "creditedDays": 668,
+      "progress": 0.61,
+      "celebrate": false,
+      "status": "UNKNOWN",
+      "country": null
+    }
+  ]
+}

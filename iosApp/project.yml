@@ -1,0 +1,131 @@
+# XcodeGen spec: `xcodegen generate --spec iosApp/project.yml` writes iosApp/Ehligible.xcodeproj (not committed).
+name: Ehligible
+options:
+  bundleIdPrefix: io.github.mirhamedjz
+  deploymentTarget:
+    iOS: "17.0"
+  developmentLanguage: en
+  createIntermediateGroups: true
+settings:
+  base:
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    CODE_SIGN_STYLE: Automatic
+    # The Apple Developer team ID goes here once the account exists (docs/publishing/app-store.md).
+    DEVELOPMENT_TEAM: ""
+targets:
+  Ehligible:
+    type: application
+    platform: iOS
+    sources:
+      - path: Ehligible
+        excludes:
+          - PrivacyInfo.xcprivacy
+      - path: Ehligible/PrivacyInfo.xcprivacy
+        buildPhase: resources
+    info:
+      path: Ehligible/Info.plist
+      properties:
+        CFBundleDisplayName: Eh-ligible
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        CFBundleDevelopmentRegion: en
+        CFBundleLocalizations: [en, fr]
+        UILaunchScreen:
+          UIColorName: LaunchBackground
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        # Compose Multiplatform needs this to render at 120 Hz (and checks for it at launch).
+        CADisableMinimumFrameDurationOnPhone: true
+        ITSAppUsesNonExemptEncryption: false
+        # Approximate location only: the permission prompt has no "Precise" switch.
+        NSLocationDefaultAccuracyReduced: true
+        NSLocationWhenInUseUsageDescription: >-
+          Eh-ligible uses your approximate location to tell whether you're in Canada today. It is checked on your
+          iPhone and never stored or sent anywhere.
+        NSLocationAlwaysAndWhenInUseUsageDescription: >-
+          With “Always”, Eh-ligible also notices your trips when the app is closed, using your approximate
+          location. It is checked on your iPhone and never stored or sent anywhere.
+    entitlements:
+      path: Ehligible/Ehligible.entitlements
+      properties:
+        com.apple.security.application-groups: [group.io.github.mirhamedjz.ehligible]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.github.mirhamedjz.ehligible
+        PRODUCT_NAME: Ehligible
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        # The Kotlin framework built by the script phase below.
+        FRAMEWORK_SEARCH_PATHS: $(SRCROOT)/../composeApp/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)
+        OTHER_LDFLAGS: ["$(inherited)", "-framework", "ComposeApp"]
+        ENABLE_USER_SCRIPT_SANDBOXING: NO
+    preBuildScripts:
+      - name: Compile Kotlin framework
+        basedOnDependencyAnalysis: false
+        script: |
+          if [ "YES" = "$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED" ]; then
+            echo "Skipping the Gradle build: OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED is YES"
+            exit 0
+          fi
+          cd "$SRCROOT/.."
+          ./gradlew :composeApp:embedAndSignAppleFrameworkForXcode
+    dependencies:
+      - target: EhligibleWidget
+
+  EhligibleWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: EhligibleWidget
+        excludes:
+          - PrivacyInfo.xcprivacy
+      - path: EhligibleWidget/PrivacyInfo.xcprivacy
+        buildPhase: resources
+    info:
+      path: EhligibleWidget/Info.plist
+      properties:
+        CFBundleDisplayName: Eh-ligible
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        CFBundleDevelopmentRegion: en
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    entitlements:
+      path: EhligibleWidget/EhligibleWidget.entitlements
+      properties:
+        com.apple.security.application-groups: [group.io.github.mirhamedjz.ehligible]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.github.mirhamedjz.ehligible.widget
+
+  # Logic tests for the widget's snapshot reading; no app or simulator UI needed.
+  EhligibleWidgetTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: EhligibleWidgetTests
+      - path: EhligibleWidget/WidgetSnapshot.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.github.mirhamedjz.ehligible.widget-tests
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  Ehligible:
+    build:
+      targets:
+        Ehligible: all
+    run:
+      config: Debug
+    archive:
+      config: Release
+  EhligibleWidgetTests:
+    build:
+      targets:
+        EhligibleWidgetTests: [test]
+    test:
+      config: Debug
+      targets:
+        - EhligibleWidgetTests

@@ -43,7 +43,9 @@
     <string name="onb_location_decline">Non merci</string>
     <string name="onb_location_on">La vérification de la position est activée. Merci!</string>
     <string name="onb_background_title">Remarquer les voyages même quand l’application est fermée?</string>
-    <string name="onb_background_body">Eh-ligible recueille votre position approximative en arrière-plan, même lorsque l’application est fermée ou inutilisée, pour noter dans quel pays vous êtes chaque jour pour votre décompte de citoyenneté. La vérification se fait sur votre téléphone quelques fois par jour; votre position n’est jamais conservée ni envoyée. À l’écran suivant, choisissez « Toujours autoriser ».</string>
+    <string name="onb_background_body">Eh-ligible recueille votre position approximative en arrière-plan, même lorsque l’application est fermée ou inutilisée, pour noter dans quel pays vous êtes chaque jour pour votre décompte de citoyenneté. La vérification se fait sur votre téléphone quelques fois par jour; votre position n’est jamais conservée ni envoyée.</string>
+    <string name="onb_background_hint_android">À l’écran suivant, choisissez « Toujours autoriser ».</string>
+    <string name="onb_background_hint_ios">Quand votre iPhone vous le demande, choisissez de toujours autoriser.</string>
     <string name="onb_background_allow">Autoriser en arrière-plan</string>
     <string name="onb_background_needs_location">Activez d’abord la position approximative pour utiliser les vérifications en arrière-plan. Vous pourrez le faire plus tard dans les Paramètres.</string>
     <string name="onb_background_on">Les vérifications en arrière-plan sont activées. Merci!</string>

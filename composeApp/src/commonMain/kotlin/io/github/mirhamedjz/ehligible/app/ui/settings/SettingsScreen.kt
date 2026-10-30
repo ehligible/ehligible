@@ -40,6 +40,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
+import io.github.mirhamedjz.ehligible.app.platform.backgroundPermissionHint
 import io.github.mirhamedjz.ehligible.app.platform.rememberBackgroundLocationPermission
 import io.github.mirhamedjz.ehligible.app.platform.rememberLocationPermission
 import io.github.mirhamedjz.ehligible.app.platform.rememberNotificationPermission
@@ -365,7 +366,9 @@ fun SettingsScreen(viewModel: AppViewModel, ready: AppUiState.Ready, onBack: () 
         AlertDialog(
             onDismissRequest = { showBackgroundDisclosure = false },
             title = { Text(stringResource(Res.string.onb_background_title)) },
-            text = { Text(stringResource(Res.string.onb_background_body)) },
+            text = {
+                Text(stringResource(Res.string.onb_background_body) + " " + stringResource(backgroundPermissionHint))
+            },
             confirmButton = {
                 TextButton(onClick = {
                     showBackgroundDisclosure = false

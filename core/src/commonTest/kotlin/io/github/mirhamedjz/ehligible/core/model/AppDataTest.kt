@@ -14,6 +14,7 @@ import io.github.mirhamedjz.ehligible.core.rules.PrePrStatus
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 import kotlin.time.Instant
@@ -118,6 +119,24 @@ class DashboardTest {
         assertEquals(CurrentStatus.Abroad("US"), abroad.dashboard(today, now)!!.currentStatus)
         val stale = abroad.dashboard(LocalDate(2026, 11, 3), Instant.parse("2026-11-03T16:00:00Z"))!!
         assertEquals(CurrentStatus.Unknown, stale.currentStatus)
+    }
+
+    @Test
+    fun theExactTargetCelebratesOnTheFirstEligibleDay() {
+        // 1,095 days from 2023-10-30 to yesterday: eligible from today.
+        val dashboard = data(LocalDate(2023, 10, 30)).dashboard(today, now)!!
+        assertTrue(dashboard.isEligibleToday)
+        assertTrue(dashboard.showsCelebration)
+    }
+
+    @Test
+    fun theSaferTargetCelebratesOnceItsMarginIsReached() {
+        val withinMargin = data(LocalDate(2023, 10, 30), CountdownTarget.SAFER).dashboard(today, now)!!
+        assertEquals(7, withinMargin.daysLeft)
+        assertFalse(withinMargin.showsCelebration)
+        val pastMargin = data(LocalDate(2023, 10, 20), CountdownTarget.SAFER).dashboard(today, now)!!
+        assertEquals(0, pastMargin.daysLeft)
+        assertTrue(pastMargin.showsCelebration)
     }
 
     @Test

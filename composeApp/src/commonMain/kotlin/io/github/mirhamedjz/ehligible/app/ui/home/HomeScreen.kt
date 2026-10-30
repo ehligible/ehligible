@@ -166,7 +166,7 @@ private fun Countdown(dashboard: Dashboard) {
         Spacer(Modifier.height(8.dp))
         val daysLeft = dashboard.daysLeft
         when {
-            dashboard.isEligibleToday && dashboard.target == CountdownTarget.EXACT -> {
+            dashboard.showsCelebration -> {
                 Text("🎉", style = MaterialTheme.typography.displayMedium)
                 Text(stringResource(Res.string.home_eligible_title), style = MaterialTheme.typography.headlineMedium)
                 Text(

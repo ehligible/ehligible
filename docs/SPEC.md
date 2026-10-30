@@ -80,7 +80,9 @@ neighbours become same-day / next-day trips. Destination = countries seen; reaso
   the fused provider delivers standing balanced-power updates (~3 h, at most hourly) to a receiver that records
   a check; the periodic worker also uses a cached fix ≤ 30 min old. Details: `docs/publishing/background-location.md`.
   Never request `ACCESS_FINE_LOCATION`.
-- iOS: significant-location-change + visit monitoring with "Always" + reduced accuracy, plus background refresh.
+- iOS: check on app open (one fix at reduced accuracy; `NSLocationDefaultAccuracyReduced`), and with "Always"
+  the significant-location-change service, which wakes or relaunches the app when the phone moves. iOS has no
+  public API for the network country, so location decides alone.
 
 ## Screens
 
@@ -98,7 +100,9 @@ neighbours become same-day / next-day trips. Destination = countries seen; reaso
 
 - Android (Glance, resizable): small = leaf fill + days to go; wide adds apply date, progress x/1,095, status
   chip, review badge. Tap opens the app. Refreshes on every recompute and just after midnight.
-- iOS (later): small + medium home-screen, lock-screen circular + rectangular.
+- iOS (WidgetKit): small + medium home-screen, lock-screen circular + rectangular + inline. A widget can't
+  run the rules, so the app writes a 14-day snapshot (`core/model/WidgetSnapshot.kt`) to the App Group
+  container on every change; each day is projected like the home screen and carries its own status.
 
 ## Notifications (opt-in)
 Milestones (25/50/75 %, 100/30/7/1 days left), "You're eligible today!", "Looks like you're travelling —

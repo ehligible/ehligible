@@ -1,0 +1,3 @@
+"CFBundleDisplayName" = "Eh-ligible";
+"NSLocationWhenInUseUsageDescription" = "Eh-ligible uses your approximate location to tell whether you're in Canada today. It is checked on your iPhone and never stored or sent anywhere.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "With “Always”, Eh-ligible also notices your trips when the app is closed, using your approximate location. It is checked on your iPhone and never stored or sent anywhere.";

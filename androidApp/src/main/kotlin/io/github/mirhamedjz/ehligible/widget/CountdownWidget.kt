@@ -120,7 +120,7 @@ class CountdownWidget : GlanceAppWidget() {
             )
         }
         val left = dashboard.daysLeft
-        val eligible = dashboard.isEligibleToday && dashboard.target == CountdownTarget.EXACT
+        val eligible = dashboard.showsCelebration
         val dateLine = dashboard.countdownDate?.let {
             if (dashboard.target ==
                 CountdownTarget.SAFER

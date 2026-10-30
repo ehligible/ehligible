@@ -1,7 +1,8 @@
-"""Builds Google Play store graphics from the brand mark and raw emulator screenshots.
+"""Builds store graphics (Google Play, and the App Store icon) from the brand mark and raw emulator screenshots.
 
 Usage (needs Pillow: `pip install pillow`):
     python tools/design/store_graphics.py icon
+    python tools/design/store_graphics.py ios-icon
     python tools/design/store_graphics.py feature
     python tools/design/store_graphics.py frame <raw.png> <out.png> "<caption>"
 
@@ -58,16 +59,28 @@ def draw_mark(img, cx, cy, size, color=(255, 255, 255)):
         d.ellipse([x - join / 2, y - join / 2, x + join / 2, y + join / 2], fill=color)
 
 
-def icon(out=None):
+def render_icon(side):
+    """The full-bleed square icon (stores apply their own rounded mask), opaque as the App Store requires."""
     scale = 4
-    img = Image.new("RGB", (512 * scale, 512 * scale), MAPLE)
-    draw_mark(img, 256 * scale, 256 * scale, int(512 * 58 / 108) * scale)
-    img = img.resize((512, 512), Image.LANCZOS)
+    img = Image.new("RGB", (side * scale, side * scale), MAPLE)
+    draw_mark(img, side * scale // 2, side * scale // 2, int(side * 58 / 108) * scale)
+    return img.resize((side, side), Image.LANCZOS)
+
+
+def icon(out=None):
+    img = render_icon(512)
     for lang in ("en-US", "fr-CA"):
         path = out or os.path.join(PLAY, lang, "graphics", "icon", "icon.png")
         os.makedirs(os.path.dirname(path), exist_ok=True)
         img.save(path)
     print("icon written")
+
+
+def ios_icon():
+    path = os.path.join(REPO, "iosApp", "Ehligible", "Assets.xcassets", "AppIcon.appiconset", "AppIcon.png")
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    render_icon(1024).save(path)
+    print("iOS icon written")
 
 
 def feature():
@@ -150,6 +163,8 @@ if __name__ == "__main__":
     command = sys.argv[1] if len(sys.argv) > 1 else ""
     if command == "icon":
         icon()
+    elif command == "ios-icon":
+        ios_icon()
     elif command == "feature":
         feature()
     elif command == "frame":
