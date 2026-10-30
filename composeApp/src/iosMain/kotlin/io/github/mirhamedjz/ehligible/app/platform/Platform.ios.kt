@@ -86,27 +86,42 @@ private class LocationAuthorization :
         get() = manager.authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse ||
             manager.authorizationStatus == kCLAuthorizationStatusAuthorizedAlways
 
+    val grantedAlways: Boolean get() = manager.authorizationStatus == kCLAuthorizationStatusAuthorizedAlways
+
     val decided: Boolean get() = manager.authorizationStatus != kCLAuthorizationStatusNotDetermined
 
     override fun locationManagerDidChangeAuthorization(manager: CLLocationManager) = onChange()
 }
 
 @Composable
-actual fun rememberLocationPermission(onResult: (Boolean) -> Unit): PermissionController {
+actual fun rememberLocationPermission(onResult: (Boolean) -> Unit): PermissionController =
+    rememberLocationAuthorization(always = false, onResult)
+
+@Composable
+actual fun rememberBackgroundLocationPermission(onResult: (Boolean) -> Unit): PermissionController =
+    rememberLocationAuthorization(always = true, onResult)
+
+@Composable
+private fun rememberLocationAuthorization(always: Boolean, onResult: (Boolean) -> Unit): PermissionController {
     val authorization = remember { LocationAuthorization() }
-    val controller = remember { StatePermissionController(authorization.granted) }
+    fun granted() = if (always) authorization.grantedAlways else authorization.granted
+    val controller = remember { StatePermissionController(granted()) }
     val latestOnResult by rememberUpdatedState(onResult)
     DisposableEffect(authorization) {
         var asked = false
         controller.onRequest = {
             asked = true
-            authorization.manager.requestWhenInUseAuthorization()
+            if (always) {
+                authorization.manager.requestAlwaysAuthorization()
+            } else {
+                authorization.manager.requestWhenInUseAuthorization()
+            }
         }
         authorization.onChange = {
-            controller.state = authorization.granted
+            controller.state = granted()
             if (asked && authorization.decided) {
                 asked = false
-                latestOnResult(authorization.granted)
+                latestOnResult(granted())
             }
         }
         onDispose { authorization.onChange = {} }

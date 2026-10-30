@@ -97,6 +97,17 @@ actual fun rememberLocationPermission(onResult: (Boolean) -> Unit): PermissionCo
     rememberPermission(Manifest.permission.ACCESS_COARSE_LOCATION, onResult)
 
 @Composable
+actual fun rememberBackgroundLocationPermission(onResult: (Boolean) -> Unit): PermissionController = rememberPermission(
+    // Before Android 10, approximate location already applies in the background.
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        Manifest.permission.ACCESS_BACKGROUND_LOCATION
+    } else {
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    },
+    onResult,
+)
+
+@Composable
 actual fun rememberNotificationPermission(onResult: (Boolean) -> Unit): PermissionController = rememberPermission(
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) Manifest.permission.POST_NOTIFICATIONS else null,
     onResult,
