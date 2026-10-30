@@ -5,6 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import kotlinx.datetime.LocalDate
+import org.jetbrains.compose.resources.StringResource
 
 enum class DateStyle { SHORT, MEDIUM, LONG }
 
@@ -57,6 +58,9 @@ expect fun rememberLocationPermission(onResult: (Boolean) -> Unit = {}): Permiss
  */
 @Composable
 expect fun rememberBackgroundLocationPermission(onResult: (Boolean) -> Unit = {}): PermissionController
+
+/** How to grant background location on this platform; ends the background-location disclosure. */
+expect val backgroundPermissionHint: StringResource
 
 @Composable
 expect fun rememberNotificationPermission(onResult: (Boolean) -> Unit = {}): PermissionController

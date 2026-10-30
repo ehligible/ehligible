@@ -43,7 +43,9 @@
     <string name="onb_location_decline">No thanks</string>
     <string name="onb_location_on">Location checks are on. Thank you!</string>
     <string name="onb_background_title">Notice trips even when the app is closed?</string>
-    <string name="onb_background_body">Eh-ligible collects your approximate location in the background, even when the app is closed or not in use, to log which country you’re in each day for your citizenship count. The check happens on your phone a few times a day; your location is never stored or sent anywhere. On the next screen, choose “Allow all the time”.</string>
+    <string name="onb_background_body">Eh-ligible collects your approximate location in the background, even when the app is closed or not in use, to log which country you’re in each day for your citizenship count. The check happens on your phone a few times a day; your location is never stored or sent anywhere.</string>
+    <string name="onb_background_hint_android">On the next screen, choose “Allow all the time”.</string>
+    <string name="onb_background_hint_ios">When your iPhone asks, choose “Change to Always Allow”.</string>
     <string name="onb_background_allow">Allow in the background</string>
     <string name="onb_background_needs_location">Turn on approximate location first to use background checks. You can do it later in Settings.</string>
     <string name="onb_background_on">Background checks are on. Thank you!</string>

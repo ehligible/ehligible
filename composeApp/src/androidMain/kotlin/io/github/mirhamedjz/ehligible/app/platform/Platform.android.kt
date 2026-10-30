@@ -19,6 +19,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.lifecycle.compose.LifecycleResumeEffect
+import io.github.mirhamedjz.ehligible.app.resources.Res
+import io.github.mirhamedjz.ehligible.app.resources.onb_background_hint_android
 import java.text.NumberFormat
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -26,6 +28,7 @@ import java.util.IllformedLocaleException
 import java.util.Locale
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.toJavaLocalDate
+import org.jetbrains.compose.resources.StringResource
 
 actual fun formatDate(date: LocalDate, style: DateStyle): String {
     val formatStyle = when (style) {
@@ -106,6 +109,8 @@ actual fun rememberBackgroundLocationPermission(onResult: (Boolean) -> Unit): Pe
     },
     onResult,
 )
+
+actual val backgroundPermissionHint: StringResource = Res.string.onb_background_hint_android
 
 @Composable
 actual fun rememberNotificationPermission(onResult: (Boolean) -> Unit): PermissionController = rememberPermission(
