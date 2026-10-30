@@ -88,7 +88,8 @@ definition of *collection* is data transmitted off the device by the app, which 
 nothing more. The privacy policy explains device backups.
 
 **Permissions:** v1.0 uses approximate location only while the app is open, so there is no background-location
-declaration yet. That comes with v1.1 (see `background-location.md`).
+declaration yet. That comes with v1.1: `background-location.md` has the declaration answers, the video script,
+the listing and release-note texts, and the two `gradle.properties` lines to change.
 
 ## 5. Closed test (starts the 14-day clock)
 
