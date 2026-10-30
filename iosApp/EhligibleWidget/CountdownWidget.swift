@@ -67,7 +67,7 @@ struct CountdownProvider: TimelineProvider {
 
     private func timeline(now: Date) -> Timeline<CountdownEntry> {
         let snapshot = WidgetSnapshot.load()
-        let schedule = snapshot?.schedule(from: now) ?? [(date: now, day: nil)]
+        let schedule: [(date: Date, day: WidgetSnapshot.Day?)] = snapshot?.schedule(from: now) ?? [(date: now, day: nil)]
         let entries = schedule.map { item in
             CountdownEntry(
                 date: item.date,
