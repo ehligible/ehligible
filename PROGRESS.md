@@ -21,20 +21,16 @@ Checkpoint for resuming work (e.g., after a usage limit). Update at the end of e
       privacy/support site, `docs/publishing/google-play.md`, tag-triggered release workflow
 - [x] M8 Background location (v1.1) behind `ehligible.backgroundLocation` — verified on the emulator: the fix
       is delivered while the app is closed and recorded; shipping steps in `docs/publishing/background-location.md`
-- [~] M9 iOS app + WidgetKit — written; verification waits for the first `iOS` workflow run (needs the repo)
+- [x] M9 iOS app + WidgetKit — verified in CI (macOS 26.6, Xcode 26.6): Kotlin tests on an iPhone simulator,
+      4 Swift widget tests, app build, launch (onboarding) and the seeded home screen, same numbers as Android;
+      screenshots are the `ios-screenshots` artifact. The widget's look hasn't been captured yet.
 - [ ] M10 Real-device test on the owner's Android phone (needs the owner)
 
 ## Current step
-M9 — iOS app written (branch `feat/ios`, merged): Kotlin side compiled on Windows; Swift side (XcodeGen project,
-SwiftUI app shell, WidgetKit widget + tests) can only be compiled by the `iOS` workflow on macOS, which needs the
-GitHub repo, which now exists: the first `iOS` run started 2026-10-30. Fix until green (screenshots are uploaded
-as artifacts). Don't push while a run is in progress unless it should be cancelled (workflows cancel in-progress
-runs on the same branch).
-
-Still to re-verify locally: the signed release builds since the M8/M9 changes (R8). Run
-`./gradlew :androidApp:assembleRelease`, then again with `-Pehligible.backgroundLocation=true
--Pehligible.versionName=1.1.0`, and smoke-test the v1.0 APK on the emulator. The 2026-10-30 04:15 attempt was
-stopped for low memory: build with the emulator closed, then start it for the smoke test.
+Everything on the plan is done or waiting on the owner (below). Optional next steps:
+- Capture the iOS widget's look in CI (render the SwiftUI views with ImageRenderer in a test, upload as images).
+- Dependabot PR #1 (material3 1.12 alpha -> 1.13 beta): check what else it pulls in before merging.
+- Don't push while a CI run should finish: workflows cancel in-progress runs on the same branch.
 
 ## Usage limits (owner asked to resume right after a reset)
 - Built-in `autoContinueAtUsageLimit` is on (~/.claude/settings.json); it resumes after a reset if this window
