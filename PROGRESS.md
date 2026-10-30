@@ -20,19 +20,14 @@ Checkpoint for resuming work (e.g., after a usage limit). Update at the end of e
       privacy/support site, `docs/publishing/google-play.md`, tag-triggered release workflow
 - [x] M8 Background location (v1.1) behind `ehligible.backgroundLocation` — verified on the emulator: the fix
       is delivered while the app is closed and recorded; shipping steps in `docs/publishing/background-location.md`
-- [ ] M9 iOS app + WidgetKit, verified in CI simulators
+- [~] M9 iOS app + WidgetKit — written; verification waits for the first `iOS` workflow run (needs the repo)
 - [ ] M10 Real-device test on the owner's Android phone (needs the owner)
 
 ## Current step
-M9 — iOS app: XcodeGen project (`iosApp/`), SwiftUI WidgetKit widget fed by an App Group snapshot,
-CoreLocation (significant-location changes + visits, reduced accuracy), privacy manifest, Info.plist usage
-strings (EN/FR), and a macOS GitHub Actions workflow that builds and runs the simulator tests/screenshots.
-
-Notes for M9:
-- `onb_background_body` ends with Android's wording ("Allow all the time"); iOS needs its own ending
-  ("Change to Always Allow").
-- The Kotlin iOS actuals already exist (`composeApp/src/iosMain`), including `requestAlwaysAuthorization()`;
-  `./gradlew check` compiles them on Windows.
+M9 — iOS app written (branch `feat/ios`, merged): Kotlin side compiled on Windows; Swift side (XcodeGen project,
+SwiftUI app shell, WidgetKit widget + tests) can only be compiled by the `iOS` workflow on macOS, which needs the
+GitHub repo. **First CI run will likely need fixes**: check the `iOS` workflow when the repo exists, then fix
+until green (screenshots are uploaded as artifacts).
 
 ## Usage limits (owner asked to resume right after a reset)
 - Built-in `autoContinueAtUsageLimit` is on (~/.claude/settings.json); it resumes after a reset if this window
