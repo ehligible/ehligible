@@ -1,7 +1,7 @@
 # XcodeGen spec: `xcodegen generate --spec iosApp/project.yml` writes iosApp/Ehligible.xcodeproj (not committed).
 name: Ehligible
 options:
-  bundleIdPrefix: io.github.ehligible
+  bundleIdPrefix: ca.ehligible
   deploymentTarget:
     iOS: "17.0"
   developmentLanguage: en
@@ -50,10 +50,10 @@ targets:
     entitlements:
       path: Ehligible/Ehligible.entitlements
       properties:
-        com.apple.security.application-groups: [group.io.github.ehligible.app]
+        com.apple.security.application-groups: [group.ca.ehligible]
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: io.github.ehligible.app
+        PRODUCT_BUNDLE_IDENTIFIER: ca.ehligible
         PRODUCT_NAME: Ehligible
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
@@ -95,10 +95,10 @@ targets:
     entitlements:
       path: EhligibleWidget/EhligibleWidget.entitlements
       properties:
-        com.apple.security.application-groups: [group.io.github.ehligible.app]
+        com.apple.security.application-groups: [group.ca.ehligible]
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: io.github.ehligible.app.widget
+        PRODUCT_BUNDLE_IDENTIFIER: ca.ehligible.widget
 
   # Widget tests without the app: snapshot reading, wording, and rendering every size to images.
   # They compile the widget's code (all but its @main entry point) together with its strings.
@@ -115,7 +115,7 @@ targets:
           - "*.entitlements"
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: io.github.ehligible.app.widget-tests
+        PRODUCT_BUNDLE_IDENTIFIER: ca.ehligible.widget-tests
         GENERATE_INFOPLIST_FILE: YES
 
 schemes:

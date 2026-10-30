@@ -7,7 +7,7 @@ How the Play Store screenshots are made (emulator + `adb`):
    with System UI demo mode (`clock 0930`, full battery and signal, no notifications).
 3. Seed the fictional demo person: `python tools/screenshots/demo_seed.py demo.json`, push it to the device and copy it
    to the app's `files/ehligible.json` with `run-as`.
-4. Set the app language with `adb shell cmd locale set-app-locales io.github.ehligible.app.debug --locales en-CA`
+4. Set the app language with `adb shell cmd locale set-app-locales ca.ehligible.debug --locales en-CA`
    (or `fr-CA`), then capture each screen with `adb exec-out screencap -p`.
 5. Frame each capture with a caption:
    `python tools/design/store_graphics.py frame raw.png androidApp/src/main/play/listings/<lang>/graphics/phone-screenshots/<n>.png "<caption>"`.

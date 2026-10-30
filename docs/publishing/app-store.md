@@ -15,11 +15,11 @@ Mac. Testing on a real iPhone needs testers with iPhones (TestFlight), since the
 
 1. Enroll at <https://developer.apple.com/programs/enroll/> (individual).
 2. **Certificates, Identifiers & Profiles → Identifiers:**
-   - App Group `group.io.github.ehligible.app`.
-   - App ID `io.github.ehligible.app` with the App Groups capability (that group).
-   - App ID `io.github.ehligible.app.widget` with the same App Group.
+   - App Group `group.ca.ehligible`.
+   - App ID `ca.ehligible` with the App Groups capability (that group).
+   - App ID `ca.ehligible.widget` with the same App Group.
 3. **App Store Connect → Apps → New App:** platform iOS, name `Eh-ligible: Citizen Countdown`, primary language
-   English (Canada), bundle ID `io.github.ehligible.app`, SKU `ehligible`. Add French (Canada).
+   English (Canada), bundle ID `ca.ehligible`, SKU `ehligible`. Add French (Canada).
 4. **Users and Access → Integrations → App Store Connect API:** create a key with the *App Manager* role.
    Save the `.p8` file, the key ID and the issuer ID as repository secrets (`ASC_KEY_P8`, `ASC_KEY_ID`,
    `ASC_ISSUER_ID`). Never commit the `.p8` (it is in `.gitignore`).

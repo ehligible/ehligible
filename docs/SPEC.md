@@ -9,7 +9,7 @@ Agreed with the product owner on 2026-10-29 (grilling rounds Q1–Q21). Rules co
 | Decision | Choice |
 |---|---|
 | Name | **Eh-ligible** — store title "Eh-ligible: Citizenship Countdown" |
-| App ID | `io.github.ehligible.app` (debug builds: `.debug` suffix); iOS bundle ID the same |
+| App ID | `ca.ehligible` (debug builds: `.debug` suffix); iOS bundle ID the same. Reverse-domain style for `ehligible.ca`, which the owner may register later; permanent once on Play |
 | Platforms | Android first (store release); iOS built + verified in CI simulators, parked until the Apple account decision |
 | Business model | Free. No ads, no analytics, no crash SDK, no account, no server |
 | Languages | English + French |
