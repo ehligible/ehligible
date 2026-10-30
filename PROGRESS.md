@@ -11,7 +11,7 @@ Checkpoint for resuming work (e.g., after a usage limit). Update at the end of e
 - [x] M0 Repo, docs, GitHub — GitHub organization `ehligible` (moved there 2026-10-30 so no public address shows
       the owner's username): app repo https://github.com/ehligible/ehligible, website repo
       `ehligible/ehligible.github.io` served at https://ehligible.github.io/ (privacy policy: `/privacy.html`).
-      App ID `io.github.ehligible.app` (iOS bundle ID the same). Release secrets (upload keystore) not set yet:
+      App ID `ca.ehligible` (iOS bundle ID the same). Release secrets (upload keystore) not set yet:
       they wait for the Play account (`docs/publishing/google-play.md`).
 - [x] M1 Gradle KMP/CMP skeleton + Android CI
 - [x] M2 Rules engine (TDD) — IRCC worked examples, mutation-checked
@@ -55,7 +55,7 @@ All build work is done; what's left needs the owner (below). Optional when picki
   republishes it). Keep `https://ehligible.github.io/privacy.html` stable: the app and the Play listing link to it.
 - Don't `cd` into subfolders in Bash (it moves the session's working directory); use absolute paths.
 - Emulator helpers: `$LOCALAPPDATA/Temp/ehligible-ref/adbui.sh` (AVD `ehligible_pixel8`; debug app
-  `io.github.ehligible.app.debug`).
+  `ca.ehligible.debug`).
 - When the owner's input or help is needed, send a phone notification (PushNotification).
 
 ## Waiting on the owner
