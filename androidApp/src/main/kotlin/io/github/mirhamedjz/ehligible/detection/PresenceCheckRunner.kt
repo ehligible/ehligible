@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
-import android.os.Build
 import android.os.SystemClock
 import android.telephony.TelephonyManager
 import android.util.Log
@@ -38,16 +37,22 @@ class PresenceCheckRunner(
     suspend fun run(foreground: Boolean): Check? {
         val allowed = mayUseLocation(foreground)
         val location = if (allowed) currentLocation(foreground) else null
+        return record(location, "foreground=$foreground location=$allowed")
+    }
+
+    /** Records a fix delivered by the background location updates ([BackgroundLocation]), if it's still fresh. */
+    suspend fun recordDelivered(location: Location): Check? {
+        if (!mayUseLocation(foreground = false) || location.ageMillis() > MAX_FIX_AGE_MILLIS) return null
+        return record(location, "delivered")
+    }
+
+    private suspend fun record(location: Location?, source: String): Check? {
         val verdict = location?.let { borders().locate(it.latitude, it.longitude, it.accuracy.toDouble()) }
         val network = networkCountry()
         val check = CheckClassifier.classify(verdict, network)
         // Debug builds only, and never coordinates: just which signals were available and the outcome.
         if (BuildConfig.DEBUG) {
-            Log.d(
-                TAG,
-                "foreground=$foreground location=$allowed fix=${location != null} " +
-                    "verdict=$verdict network=$network -> $check",
-            )
+            Log.d(TAG, "$source fix=${location != null} verdict=$verdict network=$network -> $check")
         }
         if (check == null) return null
         repository.update { it.recordCheck(check, clock.now(), TimeZone.currentSystemDefault()) }
@@ -58,25 +63,25 @@ class PresenceCheckRunner(
      * Foreground checks need approximate location. Background checks additionally need the background
      * permission, which only builds with background location (v1.1+, see docs/SPEC.md) ask for.
      */
-    private fun mayUseLocation(foreground: Boolean): Boolean {
-        if (!granted(Manifest.permission.ACCESS_COARSE_LOCATION)) return false
-        if (foreground) return true
-        if (!BuildConfig.BACKGROUND_LOCATION) return false
-        return Build.VERSION.SDK_INT < Build.VERSION_CODES.Q || granted(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+    private fun mayUseLocation(foreground: Boolean): Boolean = if (foreground) {
+        ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) ==
+            PackageManager.PERMISSION_GRANTED
+    } else {
+        BackgroundLocation.allowed(context)
     }
-
-    private fun granted(permission: String): Boolean =
-        ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @SuppressLint("MissingPermission") // Checked in mayUseLocation().
     private suspend fun currentLocation(foreground: Boolean): Location? = runCatching {
         val client = LocationServices.getFusedLocationProviderClient(context)
+        // Android throttles on-demand fixes for apps in the background. The background updates cover that,
+        // so a periodic check only takes a recent cached fix.
+        if (!foreground) return@runCatching client.lastLocation.await()?.takeIf { it.ageMillis() <= MAX_FIX_AGE_MILLIS }
         val request = CurrentLocationRequest.Builder()
-            // In the foreground a brief GPS fix is allowed: it works abroad in airplane mode, where Wi-Fi/cell
+            // A brief GPS fix is allowed: it works abroad without data or in airplane mode, where Wi-Fi/cell
             // positioning can't. The OS still coarsens the result because the app only holds approximate access.
-            .setPriority(if (foreground) Priority.PRIORITY_HIGH_ACCURACY else Priority.PRIORITY_BALANCED_POWER_ACCURACY)
-            .setMaxUpdateAgeMillis(if (foreground) MAX_FOREGROUND_FIX_AGE_MILLIS else MAX_FIX_AGE_MILLIS)
+            .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
+            .setMaxUpdateAgeMillis(MAX_FOREGROUND_FIX_AGE_MILLIS)
             .setDurationMillis(FIX_TIMEOUT_MILLIS)
             .build()
         val cancellation = CancellationTokenSource()
@@ -84,8 +89,7 @@ class PresenceCheckRunner(
             withTimeoutOrNull(FIX_TIMEOUT_MILLIS + 2_000) {
                 client.getCurrentLocation(request, cancellation.token).await(cancellation)
             }
-        val maxAge = if (foreground) MAX_FOREGROUND_FIX_AGE_MILLIS else MAX_FIX_AGE_MILLIS
-        fresh ?: client.lastLocation.await()?.takeIf { it.ageMillis() <= maxAge }
+        fresh ?: client.lastLocation.await()?.takeIf { it.ageMillis() <= MAX_FOREGROUND_FIX_AGE_MILLIS }
     }.onFailure { if (BuildConfig.DEBUG) Log.w(TAG, "Location request failed", it) }.getOrNull()
 
     private fun Location.ageMillis(): Long = (SystemClock.elapsedRealtimeNanos() - elapsedRealtimeNanos) / 1_000_000

@@ -51,6 +51,13 @@ internal class StatePermissionController(initial: Boolean) : PermissionControlle
 @Composable
 expect fun rememberLocationPermission(onResult: (Boolean) -> Unit = {}): PermissionController
 
+/**
+ * Approximate location while the app is closed ("Allow all the time" on Android, "Always" on iOS).
+ * Only builds with background location (v1.1+, docs/SPEC.md) declare and ask for it.
+ */
+@Composable
+expect fun rememberBackgroundLocationPermission(onResult: (Boolean) -> Unit = {}): PermissionController
+
 @Composable
 expect fun rememberNotificationPermission(onResult: (Boolean) -> Unit = {}): PermissionController
 

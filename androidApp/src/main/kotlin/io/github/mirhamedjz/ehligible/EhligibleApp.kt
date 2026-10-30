@@ -7,6 +7,7 @@ import io.github.mirhamedjz.ehligible.app.BackgroundSync
 import io.github.mirhamedjz.ehligible.app.data.AppRepository
 import io.github.mirhamedjz.ehligible.app.resources.Res
 import io.github.mirhamedjz.ehligible.core.geo.BorderIndex
+import io.github.mirhamedjz.ehligible.detection.BackgroundLocation
 import io.github.mirhamedjz.ehligible.detection.PresenceCheckRunner
 import io.github.mirhamedjz.ehligible.detection.PresenceWorker
 import io.github.mirhamedjz.ehligible.notifications.AndroidNotifier
@@ -36,7 +37,11 @@ class EhligibleApp : Application() {
         val repository = AppRepository.create(filesDir.resolve(AppRepository.FILE_NAME).toOkioPath(), appScope)
         AppGraph(
             repository = repository,
-            presenceChecker = { checkRunner.run(foreground = true) },
+            presenceChecker = {
+                // Coming back to the app is when a just-granted background permission takes effect.
+                BackgroundLocation.sync(this)
+                checkRunner.run(foreground = true)
+            },
             widgets = { CountdownWidget.refreshAll(this) },
             notifier = notifier,
             appInfo = AppInfo(
@@ -53,6 +58,7 @@ class EhligibleApp : Application() {
     override fun onCreate() {
         super.onCreate()
         PresenceWorker.schedule(this)
+        BackgroundLocation.sync(this)
         CountdownWidget.scheduleMidnightRefresh(this)
         appScope.launch { notifier.createChannels() }
     }

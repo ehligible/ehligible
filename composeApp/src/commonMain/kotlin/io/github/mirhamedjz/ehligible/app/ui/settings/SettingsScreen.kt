@@ -40,6 +40,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
+import io.github.mirhamedjz.ehligible.app.platform.rememberBackgroundLocationPermission
 import io.github.mirhamedjz.ehligible.app.platform.rememberLocationPermission
 import io.github.mirhamedjz.ehligible.app.platform.rememberNotificationPermission
 import io.github.mirhamedjz.ehligible.app.platform.rememberOpenDocument
@@ -51,11 +52,17 @@ import io.github.mirhamedjz.ehligible.app.resources.action_back
 import io.github.mirhamedjz.ehligible.app.resources.action_cancel
 import io.github.mirhamedjz.ehligible.app.resources.action_ok
 import io.github.mirhamedjz.ehligible.app.resources.disclaimer_short
+import io.github.mirhamedjz.ehligible.app.resources.onb_background_allow
+import io.github.mirhamedjz.ehligible.app.resources.onb_background_body
+import io.github.mirhamedjz.ehligible.app.resources.onb_background_title
 import io.github.mirhamedjz.ehligible.app.resources.onb_location_allow
 import io.github.mirhamedjz.ehligible.app.resources.onb_location_body
 import io.github.mirhamedjz.ehligible.app.resources.onb_location_decline
 import io.github.mirhamedjz.ehligible.app.resources.onb_location_title
 import io.github.mirhamedjz.ehligible.app.resources.settings_about
+import io.github.mirhamedjz.ehligible.app.resources.settings_background_off
+import io.github.mirhamedjz.ehligible.app.resources.settings_background_on
+import io.github.mirhamedjz.ehligible.app.resources.settings_background_turn_on
 import io.github.mirhamedjz.ehligible.app.resources.settings_backup
 import io.github.mirhamedjz.ehligible.app.resources.settings_backup_export
 import io.github.mirhamedjz.ehligible.app.resources.settings_backup_import
@@ -116,6 +123,8 @@ fun SettingsScreen(viewModel: AppViewModel, ready: AppUiState.Ready, onBack: () 
     var showDisclosure by remember { mutableStateOf(false) }
 
     val location = rememberLocationPermission()
+    val background = rememberBackgroundLocationPermission()
+    var showBackgroundDisclosure by remember { mutableStateOf(false) }
     val pinWidget = rememberWidgetPinner()
     val notifications = rememberNotificationPermission { granted -> if (granted) viewModel.setNotifications(true) }
     val saveBackup =
@@ -250,6 +259,20 @@ fun SettingsScreen(viewModel: AppViewModel, ready: AppUiState.Ready, onBack: () 
                             Text(stringResource(Res.string.settings_location_turn_on))
                         }
                     }
+                    if (location.granted && viewModel.appInfo.backgroundLocationSupported) {
+                        val backgroundText = if (background.granted) {
+                            Res.string.settings_background_on
+                        } else {
+                            Res.string.settings_background_off
+                        }
+                        Text(stringResource(backgroundText), style = MaterialTheme.typography.bodyMedium)
+                        if (!background.granted) {
+                            FilledTonalButton(
+                                onClick = { showBackgroundDisclosure = true },
+                                modifier = Modifier.padding(top = 8.dp),
+                            ) { Text(stringResource(Res.string.settings_background_turn_on)) }
+                        }
+                    }
                 }
             }
 
@@ -334,6 +357,25 @@ fun SettingsScreen(viewModel: AppViewModel, ready: AppUiState.Ready, onBack: () 
                 TextButton(onClick = {
                     showDisclosure = false
                 }) { Text(stringResource(Res.string.onb_location_decline)) }
+            },
+        )
+    }
+
+    if (showBackgroundDisclosure) {
+        AlertDialog(
+            onDismissRequest = { showBackgroundDisclosure = false },
+            title = { Text(stringResource(Res.string.onb_background_title)) },
+            text = { Text(stringResource(Res.string.onb_background_body)) },
+            confirmButton = {
+                TextButton(onClick = {
+                    showBackgroundDisclosure = false
+                    background.request()
+                }) { Text(stringResource(Res.string.onb_background_allow)) }
+            },
+            dismissButton = {
+                TextButton(onClick = { showBackgroundDisclosure = false }) {
+                    Text(stringResource(Res.string.onb_location_decline))
+                }
             },
         )
     }

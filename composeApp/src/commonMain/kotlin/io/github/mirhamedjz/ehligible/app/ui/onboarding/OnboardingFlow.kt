@@ -52,6 +52,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import io.github.mirhamedjz.ehligible.app.platform.formatDate
 import io.github.mirhamedjz.ehligible.app.platform.formatNumber
+import io.github.mirhamedjz.ehligible.app.platform.rememberBackgroundLocationPermission
 import io.github.mirhamedjz.ehligible.app.platform.rememberLocationPermission
 import io.github.mirhamedjz.ehligible.app.platform.rememberNotificationPermission
 import io.github.mirhamedjz.ehligible.app.platform.rememberWidgetPinner
@@ -67,6 +68,11 @@ import io.github.mirhamedjz.ehligible.app.resources.home_days_to_go
 import io.github.mirhamedjz.ehligible.app.resources.home_eligible_title
 import io.github.mirhamedjz.ehligible.app.resources.journal_add
 import io.github.mirhamedjz.ehligible.app.resources.leaf_description
+import io.github.mirhamedjz.ehligible.app.resources.onb_background_allow
+import io.github.mirhamedjz.ehligible.app.resources.onb_background_body
+import io.github.mirhamedjz.ehligible.app.resources.onb_background_needs_location
+import io.github.mirhamedjz.ehligible.app.resources.onb_background_on
+import io.github.mirhamedjz.ehligible.app.resources.onb_background_title
 import io.github.mirhamedjz.ehligible.app.resources.onb_done_button
 import io.github.mirhamedjz.ehligible.app.resources.onb_done_title
 import io.github.mirhamedjz.ehligible.app.resources.onb_done_widget
@@ -119,7 +125,7 @@ import kotlinx.datetime.minus
 import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
 
-private const val STEP_COUNT = 7
+private enum class Step { WELCOME, PR_DATE, STATUS, TRIPS, LOCATION, BACKGROUND, NOTIFICATIONS, DONE }
 
 /** Form dialogs don't close on an outside tap, so typed answers aren't lost by accident. */
 private val FormDialogProperties = DialogProperties(dismissOnClickOutside = false)
@@ -128,44 +134,51 @@ private val FormDialogProperties = DialogProperties(dismissOnClickOutside = fals
 fun OnboardingFlow(viewModel: AppViewModel) {
     val draft = viewModel.onboarding
     val today = viewModel.currentDate()
+    // The background step only exists in builds with background location (docs/SPEC.md, staged launch).
+    val steps = remember {
+        Step.entries.filter { it != Step.BACKGROUND || viewModel.appInfo.backgroundLocationSupported }
+    }
+    val numbered = steps.size - 2 // Welcome and Done aren't numbered.
     Column(Modifier.fillMaxSize().statusBarsPadding().navigationBarsPadding().imePadding()) {
-        if (draft.step in 1 until STEP_COUNT - 1) {
+        if (draft.step in 1..numbered) {
             Column(Modifier.padding(horizontal = 24.dp, vertical = 12.dp)) {
                 Text(
-                    stringResource(Res.string.onb_step, draft.step, STEP_COUNT - 2),
+                    stringResource(Res.string.onb_step, draft.step, numbered),
                     style = MaterialTheme.typography.labelMedium,
                 )
                 LinearProgressIndicator(
-                    progress = { draft.step / (STEP_COUNT - 2f) },
+                    progress = { draft.step / numbered.toFloat() },
                     modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
                 )
             }
         }
         AnimatedContent(
-            targetState = draft.step,
+            targetState = draft.step.coerceIn(steps.indices),
             transitionSpec = { (slideInHorizontally { it / 3 } + fadeIn()) togetherWith fadeOut() },
             modifier = Modifier.weight(1f),
             label = "onboarding",
-        ) { step ->
-            val next = { draft.step = step + 1 }
-            val back = { draft.step = step - 1 }
-            when (step) {
-                0 -> WelcomeStep(next)
+        ) { index ->
+            val next = { draft.step = index + 1 }
+            val back = { draft.step = index - 1 }
+            when (steps[index]) {
+                Step.WELCOME -> WelcomeStep(next)
 
-                1 -> PrDateStep(draft.prDate, { draft.prDate = it }, today, next)
+                Step.PR_DATE -> PrDateStep(draft.prDate, { draft.prDate = it }, today, next)
 
-                2 -> StatusStep(viewModel, today, next, back)
+                Step.STATUS -> StatusStep(viewModel, today, next, back)
 
-                3 -> TripsStep(viewModel, today, next, back)
+                Step.TRIPS -> TripsStep(viewModel, today, next, back)
 
-                4 -> LocationStep(next, back)
+                Step.LOCATION -> LocationStep(next, back)
 
-                5 -> NotificationsStep(onDecided = { allowed ->
+                Step.BACKGROUND -> BackgroundStep(next, back)
+
+                Step.NOTIFICATIONS -> NotificationsStep(onDecided = { allowed ->
                     draft.notifications = allowed
                     next()
                 }, back)
 
-                else -> DoneStep(viewModel)
+                Step.DONE -> DoneStep(viewModel)
             }
         }
     }
@@ -386,6 +399,35 @@ private fun LocationStep(next: () -> Unit, back: () -> Unit) {
         if (permission.granted) {
             InfoCard(
                 stringResource(Res.string.onb_location_on),
+                container = MaterialTheme.colorScheme.primaryContainer,
+            )
+        }
+    }
+}
+
+/** Play's prominent disclosure for background location: shown in the app, before the system prompt. */
+@Composable
+private fun BackgroundStep(next: () -> Unit, back: () -> Unit) {
+    val foreground = rememberLocationPermission()
+    val permission = rememberBackgroundLocationPermission { next() }
+    val canAsk = foreground.granted && !permission.granted
+    StepPage(
+        title = stringResource(Res.string.onb_background_title),
+        body = stringResource(Res.string.onb_background_body),
+        primary = stringResource(if (canAsk) Res.string.onb_background_allow else Res.string.action_continue),
+        onPrimary = { if (canAsk) permission.request() else next() },
+        secondary = if (canAsk) stringResource(Res.string.onb_location_decline) else null,
+        onSecondary = next,
+        onBack = back,
+    ) {
+        Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+            Text("🌙", style = MaterialTheme.typography.displayLarge)
+        }
+        when {
+            !foreground.granted -> InfoCard(stringResource(Res.string.onb_background_needs_location))
+
+            permission.granted -> InfoCard(
+                stringResource(Res.string.onb_background_on),
                 container = MaterialTheme.colorScheme.primaryContainer,
             )
         }

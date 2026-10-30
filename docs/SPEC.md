@@ -72,9 +72,13 @@ return = first present day after; ongoing if none). Present days that also had f
 neighbours become same-day / next-day trips. Destination = countries seen; reason = user annotation.
 
 **Schedule**
-- Android v1.0: check on app open / widget tap (approximate foreground location if granted) + mobile network
-  country every ~4 h via WorkManager + on boot / time-zone change. No background location permission.
-- Android v1.1: adds `ACCESS_BACKGROUND_LOCATION` (coarse only) so the periodic worker also gets location.
+- Android v1.0: check on app open / widget tap (approximate foreground location if granted, with a brief
+  GPS-capable fix that works abroad without data) + mobile network country every ~4 h via WorkManager + on
+  boot / time-zone change / app update. No background location permission.
+- Android v1.1 (`ehligible.backgroundLocation=true`): adds `ACCESS_BACKGROUND_LOCATION` (coarse only), asked
+  after a prominent disclosure (onboarding step, or Settings). Background apps can't get fixes on demand, so
+  the fused provider delivers standing balanced-power updates (~3 h, at most hourly) to a receiver that records
+  a check; the periodic worker also uses a cached fix ≤ 30 min old. Details: `docs/publishing/background-location.md`.
   Never request `ACCESS_FINE_LOCATION`.
 - iOS: significant-location-change + visit monitoring with "Always" + reduced accuracy, plus background refresh.
 
