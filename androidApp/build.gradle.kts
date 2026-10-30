@@ -28,7 +28,8 @@ android {
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "io.github.mirhamedjz.ehligible"
+        // Public (the Play Store link); the code's package names above are internal and unchanged.
+        applicationId = "io.github.ehligible.app"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         // CI sets the version code from the run number; local builds use 1.

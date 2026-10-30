@@ -15,11 +15,11 @@ Mac. Testing on a real iPhone needs testers with iPhones (TestFlight), since the
 
 1. Enroll at <https://developer.apple.com/programs/enroll/> (individual).
 2. **Certificates, Identifiers & Profiles → Identifiers:**
-   - App Group `group.io.github.mirhamedjz.ehligible`.
-   - App ID `io.github.mirhamedjz.ehligible` with the App Groups capability (that group).
-   - App ID `io.github.mirhamedjz.ehligible.widget` with the same App Group.
+   - App Group `group.io.github.ehligible.app`.
+   - App ID `io.github.ehligible.app` with the App Groups capability (that group).
+   - App ID `io.github.ehligible.app.widget` with the same App Group.
 3. **App Store Connect → Apps → New App:** platform iOS, name `Eh-ligible: Citizen Countdown`, primary language
-   English (Canada), bundle ID `io.github.mirhamedjz.ehligible`, SKU `ehligible`. Add French (Canada).
+   English (Canada), bundle ID `io.github.ehligible.app`, SKU `ehligible`. Add French (Canada).
 4. **Users and Access → Integrations → App Store Connect API:** create a key with the *App Manager* role.
    Save the `.p8` file, the key ID and the issuer ID as repository secrets (`ASC_KEY_P8`, `ASC_KEY_ID`,
    `ASC_ISSUER_ID`). Never commit the `.p8` (it is in `.gitignore`).
@@ -37,8 +37,8 @@ Mac. Testing on a real iPhone needs testers with iPhones (TestFlight), since the
 | Category | Utilities (secondary: Lifestyle) |
 | Price | Free, all territories (or Canada only) |
 | Encryption | None beyond Apple's (`ITSAppUsesNonExemptEncryption` = NO is in Info.plist) |
-| Privacy policy URL | `https://mirhamed-jz.github.io/ehligible/privacy.html` |
-| Support URL | `https://mirhamed-jz.github.io/ehligible/` |
+| Privacy policy URL | `https://ehligible.github.io/privacy.html` |
+| Support URL | `https://ehligible.github.io/` |
 
 **Subtitle** (30 characters): `Countdown to citizenship` / `Décompte vers la citoyenneté`.
 

@@ -26,8 +26,11 @@ automatically.
 | `androidApp/` | Android app: Glance widget, WorkManager checks, location |
 | `iosApp/` | iOS app (XcodeGen project), WidgetKit extension, CoreLocation |
 | `docs/` | [Spec](docs/SPEC.md), [glossary](docs/GLOSSARY.md), [research](docs/research/), publishing guide |
-| `site/` | GitHub Pages: privacy policy and support page |
 | `tools/` | Build-time scripts (border data, store graphics, screenshot data) |
+
+The website (support page and privacy policy) is its own repo,
+[ehligible/ehligible.github.io](https://github.com/ehligible/ehligible.github.io), served at
+<https://ehligible.github.io/>.
 
 ## Building
 

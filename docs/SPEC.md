@@ -9,7 +9,7 @@ Agreed with the product owner on 2026-10-29 (grilling rounds Q1–Q21). Rules co
 | Decision | Choice |
 |---|---|
 | Name | **Eh-ligible** — store title "Eh-ligible: Citizenship Countdown" |
-| App ID | `io.github.mirhamedjz.ehligible` (debug builds: `.debug` suffix) |
+| App ID | `io.github.ehligible.app` (debug builds: `.debug` suffix); iOS bundle ID the same |
 | Platforms | Android first (store release); iOS built + verified in CI simulators, parked until the Apple account decision |
 | Business model | Free. No ads, no analytics, no crash SDK, no account, no server |
 | Languages | English + French |
@@ -118,7 +118,8 @@ countdown paused", "A few days need your review".
 - Tests: rules engine test-first incl. IRCC worked examples; presence inference + trips; UI smoke tests.
 - Tooling: Gradle version catalog, Spotless + ktlint, Android Lint, GitHub Actions (Android on Linux, iOS on
   macOS with simulator tests + screenshots), conventional commits, PRs per milestone.
-- Repo: public `MirHamed-JZ/ehligible`, Apache-2.0; privacy policy + support page on GitHub Pages.
+- Repos (GitHub organization `ehligible`): `ehligible/ehligible` (app, Apache-2.0) and
+  `ehligible/ehligible.github.io` (website: privacy policy + support page at https://ehligible.github.io/).
 
 ## Release plan (Google Play)
 

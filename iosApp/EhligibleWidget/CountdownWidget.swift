@@ -113,9 +113,12 @@ struct MediumView: View {
                 VStack(alignment: .leading, spacing: 3) {
                     Headline(day: day, numberSize: 34, alignment: .leading)
                     if let line = Texts.dateLine(day, target: entry.target) {
+                        // French dates are long ("Demande possible dès le 2 janv. 2028"): shrink, don't wrap.
                         Text(verbatim: line)
                             .font(.caption)
                             .foregroundStyle(Palette.ink)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.75)
                     }
                     Text(verbatim: Texts.status(day))
                         .font(.caption2)
@@ -222,6 +225,8 @@ struct RectangularView: View {
                     if let line = Texts.dateLine(day, target: entry.target) {
                         Text(verbatim: line)
                             .font(.caption)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.7)
                     }
                 }
                 ProgressView(value: min(max(day.progress, 0), 1))
