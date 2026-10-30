@@ -29,8 +29,11 @@ Checkpoint for resuming work (e.g., after a usage limit). Update at the end of e
 ## Current step
 Everything on the plan is done or waiting on the owner (below). Optional next steps:
 - Capture the iOS widget's look in CI (render the SwiftUI views with ImageRenderer in a test, upload as images).
-- Dependabot PR #1 (material3 1.12 alpha -> 1.13 beta): check what else it pulls in before merging.
+- Dependabot PR #1 (material3 1.13 beta): declined; `dependabot.yml` now ignores minor/major Material 3 bumps
+  (it moves with Compose Multiplatform). Close the PR if Dependabot doesn't (closing was not permitted in auto mode).
 - Don't push while a CI run should finish: workflows cancel in-progress runs on the same branch.
+- CI builds both release variants (R8) on every push; a runtime smoke test of the signed release APK on the
+  emulator hasn't been redone since M8/M9 (do it with enough free memory: close other apps first).
 
 ## Usage limits (owner asked to resume right after a reset)
 - Built-in `autoContinueAtUsageLimit` is on (~/.claude/settings.json); it resumes after a reset if this window
