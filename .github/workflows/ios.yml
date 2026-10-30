@@ -58,7 +58,9 @@ jobs:
           ./gradlew --console=plain :core:iosSimulatorArm64Test :composeApp:iosSimulatorArm64Test
           -Pehligible.simulator=${{ steps.simulator.outputs.udid }}
 
-      - name: Widget tests
+      - name: Widget tests (and images of every widget size)
+        env:
+          TEST_RUNNER_WIDGET_SNAPSHOT_DIR: ${{ github.workspace }}/build/ios/screenshots/widget
         run: >-
           xcodebuild test -project iosApp/Ehligible.xcodeproj -scheme EhligibleWidgetTests
           -destination "id=${{ steps.simulator.outputs.udid }}" CODE_SIGNING_ALLOWED=NO

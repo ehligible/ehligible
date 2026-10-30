@@ -2,25 +2,6 @@ import SwiftUI
 import UIKit
 import WidgetKit
 
-@main
-struct EhligibleWidgets: WidgetBundle {
-    var body: some Widget {
-        CountdownWidget()
-    }
-}
-
-struct CountdownWidget: Widget {
-    var body: some WidgetConfiguration {
-        StaticConfiguration(kind: "CountdownWidget", provider: CountdownProvider()) { entry in
-            CountdownWidgetView(entry: entry)
-                .containerBackground(for: .widget) { Palette.background }
-        }
-        .configurationDisplayName(Texts.localized("widget.name"))
-        .description(Texts.localized("widget.description"))
-        .supportedFamilies([.systemSmall, .systemMedium, .accessoryCircular, .accessoryRectangular, .accessoryInline])
-    }
-}
-
 // MARK: - Timeline
 
 struct CountdownEntry: TimelineEntry {
@@ -105,7 +86,7 @@ struct CountdownWidgetView: View {
     }
 }
 
-private struct SmallView: View {
+struct SmallView: View {
     let entry: CountdownEntry
 
     var body: some View {
@@ -121,7 +102,7 @@ private struct SmallView: View {
     }
 }
 
-private struct MediumView: View {
+struct MediumView: View {
     let entry: CountdownEntry
 
     var body: some View {
@@ -200,7 +181,7 @@ private struct Message: View {
     }
 }
 
-private struct CircularView: View {
+struct CircularView: View {
     let entry: CountdownEntry
 
     var body: some View {
@@ -224,7 +205,7 @@ private struct CircularView: View {
     }
 }
 
-private struct RectangularView: View {
+struct RectangularView: View {
     let entry: CountdownEntry
 
     var body: some View {
@@ -361,12 +342,39 @@ enum Palette {
     }
 }
 
+/// Finds the bundle this code was built into: the widget extension, or the tests.
+private final class BundleToken {}
+
 /// The widget's wording, matching the app's (Localizable.strings and .stringsdict, English and French).
 enum Texts {
     static let requiredDays = 1095
 
+    /// Set only by tests, to render each language; the widget follows the system.
+    private static var languageBundle: Bundle?
+    private static var localeOverride: Locale?
+
+    private static var bundle: Bundle {
+        languageBundle ?? Bundle(for: BundleToken.self)
+    }
+
+    static var locale: Locale {
+        localeOverride ?? .current
+    }
+
+    /// Renders in `language` ("en", "fr"), or back in the system's language with nil.
+    static func use(language: String?) {
+        let base = Bundle(for: BundleToken.self)
+        guard let language, let path = base.path(forResource: language, ofType: "lproj") else {
+            languageBundle = nil
+            localeOverride = nil
+            return
+        }
+        languageBundle = Bundle(path: path)
+        localeOverride = Locale(identifier: language + "_CA")
+    }
+
     static func localized(_ key: String) -> String {
-        NSLocalizedString(key, comment: "")
+        bundle.localizedString(forKey: key, value: nil, table: nil)
     }
 
     static var eligible: String {
@@ -374,22 +382,25 @@ enum Texts {
     }
 
     static func number(_ value: Int) -> String {
-        NumberFormatter.localizedString(from: NSNumber(value: value), number: .decimal)
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.locale = locale
+        return formatter.string(from: NSNumber(value: value)) ?? String(value)
     }
 
     static func daysToGo(_ count: Int) -> String {
-        String.localizedStringWithFormat(localized("days_to_go"), count)
+        String(format: localized("days_to_go"), locale: locale, count)
     }
 
     static func review(_ count: Int) -> String {
-        String.localizedStringWithFormat(localized("review_days"), count)
+        String(format: localized("review_days"), locale: locale, count)
     }
 
     static func dateLine(_ day: WidgetSnapshot.Day, target: WidgetSnapshot.Target) -> String? {
         guard !day.celebrate, let key = day.countdownDate, let date = WidgetSnapshot.startOfDay(key) else {
             return nil
         }
-        let formatted = date.formatted(date: .abbreviated, time: .omitted)
+        let formatted = date.formatted(Date.FormatStyle(date: .abbreviated, time: .omitted, locale: locale))
         return String(format: localized(target == .safer ? "safer_date" : "apply_from"), formatted)
     }
 
@@ -403,7 +414,7 @@ enum Texts {
             return "🇨🇦 " + localized("status.in_canada")
         case .abroad:
             guard let code = day.country else { return "✈️ " + localized("status.abroad_unknown") }
-            let name = Locale.current.localizedString(forRegionCode: code) ?? code
+            let name = locale.localizedString(forRegionCode: code) ?? code
             return flag(code) + " " + String(format: localized("status.abroad"), name)
         case .nearBorder:
             return "🧭 " + localized("status.near_border")

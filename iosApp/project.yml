@@ -100,13 +100,19 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: io.github.mirhamedjz.ehligible.widget
 
-  # Logic tests for the widget's snapshot reading; no app or simulator UI needed.
+  # Widget tests without the app: snapshot reading, wording, and rendering every size to images.
+  # They compile the widget's code (all but its @main entry point) together with its strings.
   EhligibleWidgetTests:
     type: bundle.unit-test
     platform: iOS
     sources:
       - path: EhligibleWidgetTests
-      - path: EhligibleWidget/WidgetSnapshot.swift
+      - path: EhligibleWidget
+        excludes:
+          - EhligibleWidgetBundle.swift
+          - PrivacyInfo.xcprivacy
+          - Info.plist
+          - "*.entitlements"
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: io.github.mirhamedjz.ehligible.widget-tests
