@@ -8,10 +8,11 @@ Checkpoint for resuming work (e.g., after a usage limit). Update at the end of e
 3. Continue with the first unchecked item below.
 
 ## Milestones
-- [ ] M0 Repo, docs, GitHub
-- [ ] M1 Gradle KMP/CMP skeleton + Android CI
-- [ ] M2 Rules engine (TDD)
-- [ ] M3 Presence model, inference, trips, export, backup
+- [~] M0 Repo, docs, GitHub — local repo done; **public GitHub repo blocked**: the owner must run
+      `gh repo create MirHamed-JZ/ehligible --public --source . --remote origin --push` (auto-mode denied it for Claude)
+- [x] M1 Gradle KMP/CMP skeleton + Android CI (workflow written; runs once the repo exists)
+- [x] M2 Rules engine (TDD) — IRCC worked examples, mutation-checked
+- [x] M3 Presence model, inference, trips, export, backup codec, DataStore repository, border index
 - [ ] M4 Shared Compose UI (EN/FR) + fun touches
 - [ ] M5 Android detection + notifications
 - [ ] M6 Android Glance widget
@@ -21,7 +22,21 @@ Checkpoint for resuming work (e.g., after a usage limit). Update at the end of e
 - [ ] M10 Real-device test on the owner's Android phone (needs the owner)
 
 ## Current step
-M0 — writing docs and creating the GitHub repo.
+M4 — shared Compose UI (theme, onboarding, home, journal, review, checklist, settings), EN + FR.
+
+## Usage limits (owner asked to resume right after a reset)
+- Built-in `autoContinueAtUsageLimit` is on (~/.claude/settings.json); it resumes after a reset if this window
+  stays open and the laptop stays awake.
+- The status line (`~/.claude/usage/statusline.py`) writes `~/.claude/usage/limits.json` (5h/7d used % and
+  `resets_at`) and appends reset times to `limits.log`; a StopFailure/Notification hook logs limit hits and
+  auto-resume events to `limit-events.log`.
+- Keep exactly one one-shot CronCreate scheduled ~2 min after `five_hour.resets_at` (a backup that never fires
+  during the wait). Don't use frequent recurring crons: one firing mid-wait likely cancelled the auto-wait.
+
+## Conventions
+- Branch per milestone (`feat/...`), logical commits, merge `--no-ff` into main; run
+  `./gradlew spotlessApply check :androidApp:assembleDebug` before merging.
+- Don't `cd` into subfolders in Bash (it moves the session's working directory); use absolute paths.
 
 ## Waiting on the owner
 - Create the Google Play Console personal account (identity verification takes days).
