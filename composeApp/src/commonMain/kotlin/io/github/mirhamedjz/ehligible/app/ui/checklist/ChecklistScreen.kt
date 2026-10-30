@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -29,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import io.github.mirhamedjz.ehligible.app.platform.formatDate
@@ -213,13 +215,14 @@ fun ChecklistScreen(viewModel: AppViewModel, ready: AppUiState.Ready, onBack: ()
 @Composable
 private fun ChecklistItem(title: String, body: String, checked: Boolean, onToggle: (() -> Unit)?) {
     Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow)) {
-        Row(Modifier.fillMaxWidth().padding(12.dp), verticalAlignment = Alignment.Top) {
-            Checkbox(
-                checked = checked,
-                onCheckedChange = onToggle?.let { { _: Boolean -> it() } },
-                enabled =
-                    onToggle != null,
-            )
+        // The whole card toggles, not just the small box.
+        val toggle = if (onToggle != null) {
+            Modifier.toggleable(value = checked, role = Role.Checkbox, onValueChange = { onToggle() })
+        } else {
+            Modifier
+        }
+        Row(Modifier.fillMaxWidth().then(toggle).padding(12.dp), verticalAlignment = Alignment.Top) {
+            Checkbox(checked = checked, onCheckedChange = null, enabled = onToggle != null)
             Column(Modifier.padding(top = 10.dp, end = 4.dp)) {
                 Text(title, style = MaterialTheme.typography.titleMedium)
                 Text(
