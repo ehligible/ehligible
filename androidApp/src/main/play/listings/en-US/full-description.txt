@@ -23,3 +23,5 @@ A maple leaf fills up as you get closer, with the number of days left and the da
 Everything stays on your device. No account, no servers, no analytics.
 
 ℹ️ Eh-ligible is an independent app. It is not affiliated with Immigration, Refugees and Citizenship Canada (IRCC) or the Government of Canada. It gives an estimate based on the public rules published on canada.ca. Always confirm with IRCC's official tools before you apply.
+
+Official source (IRCC, physical presence): https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/adult-minor/how/physical-presence.html

@@ -23,3 +23,5 @@ Une feuille d'érable se remplit à mesure que vous approchez du but, avec le no
 Tout reste sur votre appareil. Aucun compte, aucun serveur, aucune analyse.
 
 ℹ️ Eh-ligible est une application indépendante. Elle n'a aucun lien avec Immigration, Réfugiés et Citoyenneté Canada (IRCC) ni avec le gouvernement du Canada. Elle donne une estimation fondée sur les règles publiques publiées sur canada.ca. Vérifiez toujours avec les outils officiels d'IRCC avant de présenter votre demande.
+
+Source officielle (IRCC, présence effective) : https://www.canada.ca/fr/immigration-refugies-citoyennete/services/citoyennete-canadienne/adulte-mineur/comment/calculatrice.html
