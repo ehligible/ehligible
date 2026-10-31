@@ -30,14 +30,14 @@ Checkpoint for resuming work (e.g., after a usage limit). Update at the end of e
 - [ ] M10 Real-device test on the owner's Android phone (needs the owner)
 
 ## Current step
-All build work is done; what's left needs the owner (below).
-- The signed v1.0 release is ready for the first Play upload: `C:\DevProjects\ehligible-release\1.0.0\`
-  (`.aab` + `.apk`, built by CI from commit 4612559, signed locally with `tools/release/sign.sh`). The release
-  APK was tested on the emulator on 2026-10-30: onboarding, permissions, data after a restart, the widget,
-  WorkManager jobs; no crashes. Rebuild it if the app changes before the upload.
-- Local R8 release builds run this PC out of memory (killed twice): use the CI artifact and `sign.sh` instead.
-- Don't push while a CI run should finish: workflows cancel in-progress runs on the same branch.
-- Dependabot moves Material 3 only together with Compose Multiplatform (ignore rule in `dependabot.yml`).
+Google Play: the app exists in Play Console (account "Hamed JZ", package `ca.ehligible`). Done on 2026-10-31, by
+Claude in the owner's Chrome with the owner approving each legal step: store listing EN + FR, store settings, all
+app content declarations, closed test "Closed testing - Alpha" (Canada; email list "Eh-ligible testers" with the
+owner's 2 addresses; feedback to jafarzadeh.mirhamed@gmail.com) with release 1.0.0 (version code 1) from
+`C:\DevProjects\ehligible-release\1.0.0\`. **Submitted for review 2026-10-31** (up to ~7 days).
+Next: when approved, copy the opt-in link (closed track → Testers) into `docs/publishing/tester-invite.md`
+message 2, add testers' emails to the list, and start the 14 days. Play's only warning: no native debug symbols
+(DataStore's small native library); harmless.
 
 ## Usage limits (owner asked to resume right after a reset)
 - Built-in `autoContinueAtUsageLimit` is on (~/.claude/settings.json); it resumes after a reset if this window
@@ -61,8 +61,8 @@ All build work is done; what's left needs the owner (below).
 - When the owner's input or help is needed, send a phone notification (PushNotification).
 
 ## Waiting on the owner
-1. Back up the upload key (`C:\Users\mirha\.ehligible\`) somewhere safe.
-2. Create the Google Play Console personal account (identity verification takes days), then the app.
+1. ~~Back up the upload key~~ (done) and ~~create the Play account and app~~ (done, verified 2026-10-31).
+2. Wait for Google's review of the closed test, then send testers the opt-in link.
 3. Add the three signing secrets to `ehligible/ehligible` so tagged releases build signed bundles.
 4. Closed test with ~15 testers for 14 days (`docs/publishing/tester-invite.md`), then apply for production.
 5. Connect the Android phone with USB debugging (M10).

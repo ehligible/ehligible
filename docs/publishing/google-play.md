@@ -43,10 +43,14 @@ Play Console → **Create app**:
 | Field | Answer |
 |---|---|
 | App name | `Eh-ligible: Citizen Countdown` |
+| Package name | `ca.ehligible` (asked at creation now, and permanent; use *Check availability*) |
 | Default language | English (United States) – en-US |
 | App or game | App |
-| Free or paid | Free |
-| Declarations | Accept the policies and US export laws |
+| Free or paid | Free (a free app can never become paid) |
+| Declarations | Developer Program Policies, Play App Signing Terms of Service, US export laws |
+
+Before *Create app* is available, the account must finish its verifications, including the contact phone
+number (Account details → *Verify phone number*, code by text).
 
 ## 3. Store listing
 
@@ -60,7 +64,12 @@ Play Console → **Create app**:
 | Feature graphic (1024×500) | `androidApp/src/main/play/listings/en-US/graphics/feature-graphic/feature.png` |
 | Phone screenshots | `androidApp/src/main/play/listings/en-US/graphics/phone-screenshots/1.png` … `5.png` |
 
-Then **Add translation → French (Canada) – fr-CA** with the files under `listings/fr-CA/`.
+Then the language menu → **Manage languages → French (Canada) – fr-CA** with the files under `listings/fr-CA/`.
+Translations inherit the default language's images, so the French listing only needs its own feature graphic and
+screenshots (the icon is the same). Upload screenshots one at a time: several at once land in random order.
+
+On the review step, Play asks an **AI asset declaration**: **Don't label assets** (the icon and graphics are drawn
+by `tools/design/store_graphics.py`, the screenshots are real captures, and the texts are factual).
 
 **Store settings:** category **Productivity**, contact email `jafarzadeh.mirhamed@gmail.com`, website
 `https://ehligible.github.io/`.
@@ -72,7 +81,7 @@ Then **Add translation → French (Canada) – fr-CA** with the files under `lis
 | Privacy policy | `https://ehligible.github.io/privacy.html` |
 | Ads | No, the app has no ads |
 | App access | All functionality is available without special access (no login) |
-| Content rating | Category *Utility, Productivity, Communication, or Other*; answer **No** to every content question (no violence, sexual content, gambling, user-to-user communication or location sharing with other users) |
+| Content rating | Category **All Other App Types**; accept the IARC terms; **No** to all nine questions (ratings-relevant content, users interacting, online content, age-restricted products, sharing precise location, digital purchases, cash rewards or crypto, web browser, news or educational). Result: Everyone / PEGI 3 / All ages / 3+ |
 | Target audience | **18 and over** |
 | News app | No |
 | Government apps | **No** (independent app, not made for or by a government) |
