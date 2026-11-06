@@ -24,7 +24,7 @@ okio = "3.18.2"
 play-services-location = "21.4.0"
 junit = "4.13.2"
 robolectric = "4.17"
-spotless = "8.10.4"
+spotless = "8.11.0"
 ktlint = "1.8.0"
 
 android-compileSdk = "37"
