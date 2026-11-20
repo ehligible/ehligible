@@ -1,5 +1,5 @@
 [versions]
-agp = "9.5.0"
+agp = "9.5.1"
 kotlin = "2.4.21"
 compose-multiplatform = "1.12.2"
 # Paired with Compose Multiplatform 1.12.2 per its changelog.
@@ -19,7 +19,7 @@ androidx-test-ext-junit = "1.3.0"
 androidx-compose-ui-test = "1.12.1"
 kotlinx-coroutines = "1.11.0"
 kotlinx-datetime = "0.8.0"
-kotlinx-serialization = "1.12.0"
+kotlinx-serialization = "1.13.0"
 okio = "3.18.2"
 play-services-location = "21.4.0"
 junit = "4.13.2"
